@@ -34,5 +34,5 @@ app.get('/vc', (req, res) => {
 app.get('/lobby', (req, res) => res.render('lobby'));
 app.get('/room', (req, res) => res.render('room'));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
