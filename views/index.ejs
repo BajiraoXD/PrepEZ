@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!--swiper css link-->
+    <link
+    rel="stylesheet"href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <!--swiper js link-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!--custom css file link-->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        /* Styling the icon */
+        .chatbot-icon {
+            font-size: 30px;
+            color: #007bff;
+            cursor: pointer;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fff;
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Styling the iframe container */
+        .iframe-container {
+            display: none; /* Initially hidden */
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            border: none;
+            z-index: 1000;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100,200;300,400;500,600;&display=swap');
+:root{
+    --main-color: #8e44ad;
+    --black:#222;
+    --white:#fff;
+    --light-black: #777;
+    --light-white: #fff9;
+    --dark-bg: rgba(0,0,0,.7);
+    --light-bg: #eee;
+    --border:  .1rem solid var(--black);
+    --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+    --text-shadow:0 1.5rem 3rem rgba(0,0,0,.3);
+    }
+
+    *{
+    font-family: 'Poppins', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    outline: none; border:none;
+    text-decoration: none;
+    text-transform: capitalize;
+    }
+
+    html{
+        font-size: 62.5%;
+        overflow-x: hidden;
+    }
+    html::-webkit-scrollbar{
+        width: 1rem;
+    }
+    html::-webkit-scrollbar-track{
+        background-color: var(--white);
+    }
+    html::-webkit-scrollbar-thumb{
+        background-color: var(--main-color);
+    }
+    section{
+        padding: 5rem 10%;
+    }
+    @keyframes fadeIn{
+        0%{
+            transform: scale(0.5);
+            opacity: 0;
+        }
+    }
+    .btn{
+        display: inline-block;
+        background: var(--black);
+        margin-top: 1rem;
+        color:var(--white);
+        font-size: 1.7rem;
+        padding: 1rem 3rem;
+        cursor:  pointer;
+    }
+
+    .btn:hover{
+        background: var(--main-color);
+
+    }
+    .heading-title{
+        text-align: center;
+        margin-bottom: 3rem;
+        font-size: 6rem;
+        text-transform: uppercase;
+        color: var(--black);
+    }
+    .header{
+        position: sticky;
+        top:0; left:0; right:0;
+        z-index: 1000;
+        background-color: var(--white);
+        display:flex;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        box-shadow: var(--box-shadow);
+        align-items:center;
+        justify-content:space-between;
+    }
+.header .logo{
+    font-size: 2.5rem;
+    color: var(--black);
+}
+
+.header .navbar a{
+    font-size: 2rem;
+    margin-left: 2rem;
+    color: var(--black);
+}
+
+.header .navbar a:hover{
+    color: var(--main-color);
+}
+
+#menu-btn{
+    font-size: 2.5rem; 
+    cursor: pointer;
+    color: var(--black);
+    display: none;
+}
+
+.home{
+    padding: 0;
+}
+
+.home .slide{
+    text-align: center;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size:cover !important;
+    background-position: center !important;
+    min-height: 60rem;
+}
+
+.home .slide .content{
+    width: 85rem;
+    display: none;
+}
+
+.home .swiper-slide-active .content{
+    display: inline-block;
+}
+
+.home .slide .content span{
+    display: block;
+    font-size: 2.2rem;
+    color:var(--light-white);
+    padding-bottom: 1rem;
+    animation: fadeIn .2s linear backwards .2s;
+}
+
+.home .slide .content h3{
+    font-size: 6vw;
+    color:var(--white);
+    text-transform: uppercase;
+    line-height: 1;
+    text-shadow: var(--text-shadow);
+    padding: 1rem 0;
+    animation: fadeIn .2s linear backwards .4s;
+}
+
+.home .slide .content .btn{
+    animation: fadeIn .2s linear backwards .6s;
+}
+
+.home .swiper-button-next,
+.home .swiper-button-prev{
+    top:inherit;
+    bottom: 0;
+    right: 0;
+    height: 7rem;
+    width: 7rem;
+    background: var(--white);
+    color: var(--black);
+}
+
+.home .swiper-button-next:hover,
+.home .swiper-button-prev:hover{
+    background: var(--main-color);
+    color: var(--white);
+}
+
+
+.home .swiper-button-next::after
+.home .swiper-button-prev::after{
+    font-size: 7rem;
+}
+
+.home .swiper-button-prev{
+    right: inherit;
+}
+.services .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem,1fr));
+    gap: 1.5rem;
+}
+.services .box-container .box{
+    padding: 3rem 2rem;
+    text-align: center;
+    background: pink;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+.services .box-container .box:hover{
+    background: plum;
+}
+.services .box-container .box img{
+    height: 8rem;
+}
+
+.services .box-container .box h3{
+    color: var(--white);
+    font-size: 1.7rem;
+    padding-top: 1rem;
+}
+
+.home-about{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.home-about .image{
+    flex: 1 1 20rem;
+}
+
+.home-about .image img{
+    width: 100%;
+}
+
+.home-about .content{
+    flex: 1 1 20rem;
+    padding: 3rem;
+    background: var(--light-bg);
+}
+
+.home-about .content h3{
+    font-size: 3rem;
+    color: var(--black);
+}
+
+.home-about .content p{
+    font-size: 1.5rem;
+    padding: 1rem;
+    line-height: 2;
+    color: var(--black);
+}
+
+
+
+.home-pakages {
+    width: 100%;
+    padding: 20px;
+    background-color: #f9f9f9; /* Background color for the FAQ section */
+}
+
+.heading-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333; /* Text color for the heading */
+}
+
+.b-c {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between each b element */
+    background-color: rgb(255, 255, 255);
+}
+
+.b {
+    margin-left: 8cm;
+    background-color: rgb(235, 216, 235);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333; /* Text color inside the boxes */
+    width: 65%; /* Ensures each box takes the full width of the container */
+}
+
+.b h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #007bff; /* Color for the h3 inside each box */
+}
+
+.b {
+  /* Base styles for the job card */
+ 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+}
+
+.b:hover {
+  transform: scale(1.1); /* Zoom in effect */
+}
+
+
+.load-more {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.load-more a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.load-more a:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+
+
+
+
+.reviews{
+    background: var(--light-bg);
+}
+
+.reviews .slide{
+    padding: 2rem;
+    border: var(--border);
+    background: var(--white);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    user-select: none;
+    border-radius: 2.5rem;
+}
+
+.reviews .slide .stars{
+    padding-bottom: .5rem;
+}
+.reviews .slide .stars i{
+    font-size: 1.7rem;
+    color: var(--main-color);
+    
+}
+
+.reviews .slide p{
+    font-size: 1.5rem;
+    color: var(--light-black);
+    line-height: 2;
+    padding: 1rem 0;
+}
+
+.reviews .slide h3{
+    font-size: 2rem;
+    color: var(--black);
+    
+}
+
+.reviews .slide span{
+    font-size: 1.5rem;
+    color: var(--main-color);
+    display: block;
+
+}
+
+.reviews .slide img{
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+    margin-top: 1rem;
+}
+
+.footer{
+    background:url(image/footer-bg.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    
+}
+.footer .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(25rem, 1fr));
+    gap: 3rem;
+}
+.footer .box-container .box h3{
+    color:var(--white);
+    font-size: 2.5rem;
+    padding-bottom: 2rem;
+}
+.footer .box-container .box a{
+    color: var(--light-white);
+    font-size: 1.5rem;
+    padding-bottom: 1.5rem;
+    display: block;
+}
+.footer .box-container .box a i{
+    color:var(--main-color);
+    padding-right: .5rem;
+    transition: .2s linear;
+    
+}
+.footer .box-container .box a:hover i{
+    padding-right: 2rem;
+
+}
+
+.footer .credit{
+    text-align: center;
+    padding-top: 3rem;
+    margin-top: 3rem;
+    border-top: .1rem solid var(--light-white);
+    font-size: 2rem;
+    color: var(--white);
+}
+/*media queries*/
+@media (max-width:1200px){
+    section{
+        padding:3rem 5%;
+    }
+}
+
+@media (max-width:991px){
+    html{
+        font-size: 55%;
+    }
+    section{
+        padding: 3rem 2rem;
+
+    }
+    .home .slide .content h3{
+        font-size: 10vw;
+        
+    }
+}
+
+@media (max-width:768px){
+
+    #menu-btn{
+        
+        display: inline-block;
+        transition: .2s linear;
+    }
+
+    #menu-btn.fa-times{
+        transform:rotate(180deg);
+    }
+    .header .navbar{
+        position: absolute;
+        top:99%; left:0; right:0;
+        background-color:var(--white);
+        border-top:var(--border);
+        padding: 2rem;
+        transition: .2s linear;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+
+    .header .navbar.active{
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .header .navbar a{
+        display:block;
+        margin:2rem;
+        text-align:center;
+    }
+}
+
+@media (max-width:450px){
+    html{
+        font-size:50%;
+    }
+    .heading-title{
+        font-size: 3.5rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <!--header section start-->
+    <section class="header">
+        <a href="index" class="logo">PrepEZ</a>
+        <nav class="navbar">
+            <a href="#home">home</a>
+            <a href="#about">about</a>
+            <a href="#FAQ">FAQ</a>
+            <a href="#Feedback">feedback</a>
+            <a href="/login">Login</a>
+            <a href="/register">Signup</a>
+        </nav>
+
+        <div id="menu-btn" class="fas fa-bars"></div>
+    </section>
+    <!--header section end-->
+
+
+    <!--home section start-->
+    <section class="home" id="home">
+        <div class="swiper home-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide slide" style="background:url(/image/home_slider_1.jpg) no-repeat">
+                    <div class="content">
+                        <span>Unlock Your Potential</span>
+                        <h3>Find a new way to study</h3>
+                        <a href="" class="btn">discover me</a>
+                    </div>
+                    
+                </div>
+
+                <div class="swiper-slide slide" style="background:url(/image/home_slider_2.jpg)  no-repeat">
+                    <div class="content">
+                        <span>Challenge Yourself</span>
+                        <h3>Exams made easy, grading made smarter</h3>
+                        <a href="" class="btn">discover me</a>
+                    </div>
+                    
+                </div>
+
+                <div class="swiper-slide slide" style="background:url(/image/home_slider_3.jpg) no-repeat">
+                    <div class="content">
+                        <span>Boost Your Confidence</span>
+                        <h3>Simplify testing with AI</h3>
+                        <a href="" class="btn">discover me</a>
+                    </div>
+                </div>
+                <div class="swiper-slide slide" style="background:url(/image/home_slider_4.jpg)  no-repeat">
+                    <div class="content">
+                        <span>Learn. Practice. Succeed</span>
+                        <h3>Effortless exams, intelligent grading</h3>
+                        <a href="" class="btn">discover me</a>
+                    </div>
+                    
+                </div>
+                <div class="swiper-slide slide" style="background:url(/image/home_sider_5.jpg)  no-repeat">
+                    <div class="content">
+                        <span>Prepare for Success</span>
+                        <h3>Revolutionize your exams with AI</h3>
+                        <a href="" class="btn">discover me</a>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+    <!--home section end-->
+
+    <!--service section start-->
+    <section class="services">
+        <h1 class="heading-title"> our services </h1>
+    <div class="box-container">
+            <div class="box">
+                <img src="/image/service_test.jpg" alt="">
+                <h3>online Test</h3>
+            </div>
+            <div class="box">
+                <img src="/image/service_interview.jpg" alt="">
+                <h3>online interview</h3>
+            </div>
+            <div class="box">
+                <img src="/image/service_exam.jpg" alt="">
+                <h3>Online Exam</h3>
+            </div>
+            <div class="box">
+                <img src="/image/service_ai.jpg" alt="">
+                <h3>Ai result analysis</h3>
+            </div>
+            <div class="box">
+                <img src="/image/service_chatbot.jpg" alt="">
+                <h3>Chatbot</h3>
+            </div>
+    </div>
+    </section>
+    <!--service section end-->
+    <!--home about section start-->
+    <section class="home-about" id="about">
+        <div class="image">
+            <img src="/image/about_us.jpg" alt="">
+        </div>
+        <div class="content">
+            <h3>about_us</h3>
+            <p>We're a group undergrads united by a shared vision to revolutionize online examinations.
+                Our Journey
+                We sought to create an efficient, reliable, and interactive online exam platform that addresses the pressing needs of educators and students in the digital age. Traditional examination methods often struggle online, leading to challenges in maintaining integrity, ensuring unbiased grading, and providing personalized interactions.
+                Our Mission
+                We aim to provide an innovative online examination platform that leverages AI to enhance accuracy, efficiency, and fairness. Our platform is designed to meet the evolving needs of educational institutions, ensuring a seamless and secure experience for all.</p>
+            <a href="" class="btn">read more</a>
+        </div>
+    </section>
+    <!--FAQ section started-->
+    <section class="home-pakages" id="FAQ">
+        <h1 class="heading-title">FAQ</h1>
+        <div class="b-c">
+        <div class="b">
+            <h3>1.How do I submit my test?</h3>
+            <p>To submit your test:
+                Ensure you have answered all the questions to the best of your ability.
+                If you are taking an MCQ test, review your selections to make sure everything is correct.
+                For subjective questions, verify that your responses are complete and clear.
+                Once you're ready, click the “Submit” button at the bottom of the test page.
+                A confirmation pop-up will appear; click “Confirm” to finalize your submission.
+                After submission, you will receive a confirmation message, and your test will be automatically graded for MCQs, while subjective answers will be evaluated using our AI system.</p>
+        </div>
+        <div class="b">
+            <h3>2.How do I join an interview?</h3>
+            <p>Joining an interview is easy:
+Log in to your account and navigate to the "Interviews" section.
+You’ll find a list of scheduled interviews with details such as date, time, and the interviewer’s name.
+Click on the “Join” button next to your scheduled interview.
+The platform will automatically launch the interview interface, using your webcam and microphone.
+Ensure you have a stable internet connection and that your camera and microphone are functioning properly.
+You may be asked to verify your identity before the interview starts.</p>
+        </div>
+        <div class="b">
+            <h3>3. What should I do if I encounter technical issues during a test?
+            </h3>
+            <p>If you encounter any technical issues during a test:
+
+                First, try refreshing your browser or checking your internet connection.
+                If the issue persists, click on the “Help” button to access the platform’s support chatbot powered by Dialogflow NLP.
+                Describe your problem, and the chatbot will provide immediate assistance or escalate your issue to a support agent.
+                If you are unable to resolve the issue, your test progress will be saved, and you can resume it once the problem is fixed. Contact your instructor or the platform's support team if you need further assistance.</p>
+        </div>
+        <div class="b">
+            <h3>4.Can I retake a test if I lose connection or experience a technical problem?</h3>
+            <p>Yes, the platform is designed to accommodate such situations:
+
+                If you lose connection during a test, your answers are automatically saved periodically.
+                You can log back in and continue from where you left off once your connection is restored.
+                However, retakes due to technical issues are subject to the policies set by your instructor or institution. Please contact them to discuss your situation and receive further instructions.</p>
+        </div>
+        <div class="b">
+            <h3>5. How does the platform ensure the integrity of proctored exams?
+            </h3>
+            <p>The platform incorporates several features to ensure the integrity of proctored exams:
+
+                Webcam Monitoring: During the exam, your webcam will be active, and the system will record the session for review.
+                Screen Monitoring: The platform monitors your screen activity to ensure you do not navigate away from the exam page.
+                AI-Powered Proctoring: The system uses AI algorithms to detect suspicious behavior or unauthorized resources.
+                Identity Verification: Before starting the exam, you will be asked to verify your identity using a valid ID and facial recognition.
+                These measures are in place to maintain a fair and secure testing environment.</p>
+        </div>
+    </div>
+        <div class="load-more"><a href="">load more</a></div>
+    </section>
+    <!--FAQ section end-->
+    <!--Review section-->
+    <section class="reviews" id="Feedback">
+        <h1 class="heading-title">Client review</h1>
+        <div class="swiper reviews-slider">
+            <div class="swiper-wrapper">
+            <div class="swiper-slide slide">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>Fantastic platform! The interface is user-friendly, 
+                    and taking exams has never been easier. 
+                    Highly recommended!</p>
+                    <h3>Luca Bianchi</h3>
+                    <img src="image/review_1.jpeg" alt="">
+            </div>
+            <div class="swiper-slide slide">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    
+                </div>
+                <p>This website made online exams so smooth and 
+                    stress-free. 
+                    Everything works flawlessly. Great job!</p>
+                    <h3>Amara Papadopoulos</h3>
+                    <img src="image/review_2.jpeg" alt="">
+            </div>
+            <div class="swiper-slide slide">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    
+                </div>
+                <p>Great platform overall! It's easy to navigate, 
+                    though a few minor improvements would make it perfect.</p>
+                    <h3>Ines Costa</h3>
+                    <img src="/image/review_3.jpeg" alt="">
+            </div>
+            <div class="swiper-slide slide">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    
+                </div>
+                <p>The platform is decent, but there were a few glitches during the exam. 
+                    It's a good start, but needs some improvements.</p>
+                    <h3>Mateo Fernández </h3>
+                    <img src="/image/review_4.jpeg" alt="">
+            </div>
+            <div class="swiper-slide slide">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>Outstanding platform! The exam features are well thought out, 
+                    and the performance is top-notch. Couldn't be happier!</p>
+                    <h3>Sven Johansson</h3>
+                    <img src="/image/review_5.jpeg" alt="">
+            </div>
+            <div class="swiper-slide slide">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>                    
+                </div>
+                <p>Very solid website for taking exams. The functionality is good, 
+                    but some additional features would be a nice touch.</p>
+                    <h3>Emir Kaya</h3>
+                    <img src="/image/review_6.jpeg" alt="">
+            </div>
+            <div class="swiper-slide slide">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                   
+                </div>
+                <p>I'm impressed with how smoothly the exams run. Just a 
+                    couple of small tweaks needed for a 5-star experience.</p>
+                    <h3>Leila Haddad</h3>
+                    <img src="/image/review_7.jpeg" alt="">
+            </div>
+            <div class="swiper-slide slide">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>Impressed with the functionality and ease of use.
+                     My learners found it 
+                    intuitive and efficient. Excellent work!</p>
+                    <h3>Sofia Rossi</h3>
+                    <img src="/image/review_8.jpeg" alt="">
+            </div>
+        </div>
+    </div>
+    </section>
+    <!--Review Section-->
+    <!--footer section start-->
+    
+   
+    <section class="footer">
+        <div class="box-container">
+        <div class="box">
+            <h3>Quick links</h3>
+            <a href="#home"><i class="fas fa-angle-right"></i>home</a>
+            <a href="#about"><i class="fas fa-angle-right"></i>about</a>
+            <a href="#FAQ"><i class="fas fa-angle-right"></i>FAQ</a>
+            <a href="#Feedback"><i class="fas fa-angle-right"></i>feedback</a>
+            <a href="#contect"><i class="fas fa-angle-right"></i>contect</a>
+        </div>
+        <div class="box">
+            <h3>extra link</h3>
+            <a href="#"><i class="fas fa-angle-right"></i>ask question</a>
+            <a href="#"><i class="fas fa-angle-right"></i>abou us</a>
+            <a href="#"><i class="fas fa-angle-right"></i>privacy policy</a>
+            <a href="#"><i class="fas fa-angle-right"></i>terms of use</a>
+        </div>
+        <div class="box" id="contact">
+            <h3>contact info</h3>
+            <a href="#"><i class="fas fa-phone"></i>+1 (800) 123-4567</a>
+            <a href="#"><i class="fas fa-phone"></i>+44 20 7946 0958</a>
+            <a href="#"><i class="fas fa-envelope"></i>www.ezeprep.com</a>
+            <a href="#"><i class="fas fa-map"></i>Kolkata india-700001</a>
+            
+        </div>
+
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#"><i class="fab fa-facebook-f"></i>facebook</a>
+            <a href="#"><i class="fab fa-twitter"></i>twitter</a>
+            <a href="#"><i class="fab fa-instagram"></i>instagram</a>
+            <a href="#"><i class="fab fa-linkedin"></i>linkedin</a>
+            
+        </div>
+    </div>
+
+    <div class="credit">Thank you <span>for visiting </span>our website</div>
+    </section>
+    <!--footer section end-->
+
+
+
+
+
+<!-- Chatbot icon -->
+<i class="fas fa-comments chatbot-icon" onclick="toggleIframe()"></i>
+
+<!-- Iframe container -->
+<div class="iframe-container" id="chatbotIframe">
+    <iframe
+        allow="microphone;"
+        width="350"
+        height="430"
+        src="https://console.dialogflow.com/api-client/demo/embedded/a5c92400-4773-4118-8fed-bf01104b28f6">
+    </iframe>
+</div>
+
+<script>
+    // JavaScript function to toggle the visibility of the iframe
+    function toggleIframe() {
+        var iframeContainer = document.getElementById("chatbotIframe");
+        if (iframeContainer.style.display === "none" || iframeContainer.style.display === "") {
+            iframeContainer.style.display = "block";
+        } else {
+            iframeContainer.style.display = "none";
+        }
+    }
+    let menu=document.querySelector('#menu-btn');
+let navbar = document.querySelector('.header .navbar');
+menu.onclick = () =>{
+menu.classList.toggle('fa-times');
+navbar.classList.toggle('active');
+};
+window.onscroll = () =>{
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('active');
+    };
+    var swiper = new Swiper(".home-slider", {
+        loop:true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    
+      var swiper = new Swiper(".reviews-slider", {
+            loop:true,
+            spaceBetween: 20,
+            autoHeight: true,
+            grabCursor:true,
+            breakpoints: {
+                640: {
+                  slidesPerView: 1,
+                  
+                },
+                768: {
+                  slidesPerView: 2,
+                  
+                },
+                1024: {
+                  slidesPerView: 3,
+                  
+                },
+              },
+        }
+      );
+</script>
+   
+      
+
+
+
+
+
+
+
+
+    
+    <!--swiper js link-->
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <!--custome js file link-->
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>

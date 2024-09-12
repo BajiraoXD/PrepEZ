@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Exam Mastery Hub</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class = "main">
+        <div class="register-container">
+            <h2 align="center">Sign Up</h2>
+            <form action="/auth/signup" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account? <a style="text-decoration: none;" href="/login">Login</a></p>
+        </div>
+        <img style="margin-top: 1px; margin-left: 50px;" width="63%" height="100%" src="\images\logo.png" alt="logo">
+    </div>
+
+</body>
+</html>

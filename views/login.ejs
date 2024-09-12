@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PrepEZ</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class = "main">
+        <div class="login-container">
+            <h2 align = "center">Login</h2>
+            <form action="/auth/login" method="POST">
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p>Or login with Google</p>
+            <div id="g_id_onload"
+                 data-client_id="<%= process.env.GOOGLE_CLIENT_ID %>"
+                 data-callback="handleCredentialResponse">
+            </div>
+            <div class="g_id_signin" data-type="standard"></div>
+            <p>Don't have an account? <a  style="text-decoration: none;" href="/register">Sign up</a></p>
+            <p>Are you a educator?<a style="text-decoration: none;" href="">Click here</a></p>
+        </div>
+        <img style="margin-top: 1px; margin-left: 50px;" width="63%" height="100%" src="\images\logo.png" alt="logo">
+    </div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function handleCredentialResponse(response) {
+            fetch('/auth/google', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id_token: response.credential }),
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.token) {
+                    window.location.href = '/home_student'; // Redirect to dashboard or homepage after login
+                } else {
+                    alert('Google login failed');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
