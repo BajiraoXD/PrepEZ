@@ -5,59 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Exam Mastery Hub</title>
     <style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-image:url("../image/background-login-register.jpg")
-}
-.main
-{
-    background: white;
-    width:50%;
-    height: 50%;
-    border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-}
-.login-container, .register-container {
-    background: pink;
-    padding: 20px;
-    height: 91.5%;
-    border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-    float: left;
-}
-input {
-    display: block;
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-left:0.5cm;
-}
-button {
-    background-color: rgba(0, 0, 0, 0.438);
-    color: white;
-    padding: 10px;
-    margin-left: 1.5cm;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 50%;
-}
-button:hover {
-    background-color: plum;
-}
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("../image/background-login-register.jpg");
+            background-size: cover;
+            background-position: center;
+        }
 
+        /* Main container for registration */
+        .main {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        /* Container for registration form */
+        .register-container {
+            flex: 1;
+            background: pink;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Form input styles */
+        input {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Button styles */
+        button {
+            background-color: rgba(0, 0, 0, 0.438);
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button:hover {
+            background-color: plum;
+        }
+
+        /* Image style */
+        .main img {
+            display: none; /* Hidden on smaller screens */
+            width: 100%;
+            object-fit: cover;
+        }
+
+        /* Media Queries for larger screens */
+        @media (min-width: 768px) {
+            .main {
+                flex-direction: row;
+            }
+
+            .register-container {
+                width: 50%;
+                padding: 40px;
+            }
+
+            .main img {
+                display: block;
+                width: 50%;
+            }
+        }
+
+        /* Media Queries for extra large screens */
+        @media (min-width: 1024px) {
+            .register-container {
+                padding: 60px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class = "main">
+    <div class="main">
         <div class="register-container">
             <h2 align="center">Sign Up</h2>
             <form action="/auth/signup" method="POST">
@@ -68,7 +114,7 @@ button:hover {
             </form>
             <p>Already have an account? <a style="text-decoration: none;" href="/login">Login</a></p>
         </div>
-        <img style="margin-top: 1px; margin-left: 50px;" width="63%" height="100%" src="\images\logo.png" alt="logo">
+        <img src="/images/logo.png" alt="logo">
     </div>
 
 </body>
