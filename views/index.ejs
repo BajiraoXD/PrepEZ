@@ -106,7 +106,7 @@
         position: sticky;
         top:0; left:0; right:0;
         z-index: 1000;
-        background-color: var(--white);
+        background-color: transparent;
         display:flex;
         padding-top: 2rem;
         padding-bottom: 2rem;
@@ -252,15 +252,9 @@
 .services .box-container .box{
     padding: 3rem 2rem;
     text-align: center;
-    background: pink;
+    background: rgb(255, 255, 255);
     border-radius: 1.5rem;
     cursor: pointer;
-}
-.services .box-container .box:hover{
-    background: plum;
-}
-.services .box-container .box img{
-    height: 8rem;
 }
 
 .services .box-container .box h3{
@@ -268,6 +262,23 @@
     font-size: 1.7rem;
     padding-top: 1rem;
 }
+
+
+/* Zoom effect on hover */
+.services .box:hover i {
+    transform: scale(1.2); /* Zoom in */
+    color: #007bff;
+}
+
+/* Heading styling */
+.heading-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: var(--black);
+}
+
 
 .home-about{
     display: flex;
@@ -868,23 +879,23 @@
         <h1 class="heading-title"> our services </h1>
     <div class="box-container">
             <div class="box">
-                <img src="/image/service_test.jpg" alt="">
+                <i class="fa-solid fa-globe fa-6x" style="color: #B197FC;"></i>
                 <h3>online Test</h3>
             </div>
             <div class="box">
-                <img src="/image/service_interview.jpg" alt="">
+                <i class="fa-solid fa-video fa-6x" style="color: #B197FC;"></i>
                 <h3>online interview</h3>
             </div>
             <div class="box">
-                <img src="/image/service_exam.jpg" alt="">
-                <h3>Online Exam</h3>
+                <i class="fa-brands fa-codepen fa-6x" style="color: #B197FC;"></i>
+                <h3>Practice Quiz</h3>
             </div>
             <div class="box">
-                <img src="/image/service_ai.jpg" alt="">
+                <i class="fa-solid fa-robot fa-6x" style="color: #B197FC;"></i>
                 <h3>Ai result analysis</h3>
             </div>
             <div class="box">
-                <img src="/image/service_chatbot.jpg" alt="">
+                <i class="fa-brands fa-bots fa-6x" style="color: #b49ef6;"></i>
                 <h3>Chatbot</h3>
             </div>
     </div>
