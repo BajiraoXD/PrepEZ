@@ -301,6 +301,118 @@
     color: var(--black);
 }
 
+/*about section modify*/
+/* Base styles (Desktop) */
+.home-about {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2rem; /* Add some padding for better spacing */
+}
+
+.home-about .image {
+    flex: 1 1 20rem;
+}
+
+.home-about .image img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+}
+
+.home-about .content {
+    flex: 1 1 20rem;
+    padding: 3rem;
+    background: var(--light-bg);
+}
+
+.home-about .content h3 {
+    font-size: 3rem;
+    color: var(--black);
+}
+
+.home-about .content p {
+    font-size: 1.5rem;
+    padding: 1rem;
+    line-height: 2;
+    color: var(--black);
+}
+
+.home-about .content .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.home-about .content .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Tablet view (768px to 1024px) */
+@media (max-width: 1024px) {
+    .home-about {
+        padding: 1rem;
+    }
+
+    .home-about .image,
+    .home-about .content {
+        flex: 1 1 100%;
+    }
+
+    .home-about .content {
+        padding: 2rem;
+    }
+
+    .home-about .content h3 {
+        font-size: 2.5rem;
+    }
+
+    .home-about .content p {
+        font-size: 1.2rem;
+    }
+
+    .home-about .content .btn {
+        font-size: 1rem;
+    }
+}
+
+/* Mobile view (up to 767px) */
+@media (max-width: 767px) {
+    .home-about {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .home-about .image {
+        flex: 1 1 100%;
+        margin-bottom: 1rem;
+    }
+
+    .home-about .content {
+        flex: 1 1 100%;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .home-about .content h3 {
+        font-size: 2rem;
+    }
+
+    .home-about .content p {
+        font-size: 1rem;
+    }
+
+    .home-about .content .btn {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
+/*about section end modify*/
 
 
 .home-pakages {
@@ -316,61 +428,120 @@
     color: #333; /* Text color for the heading */
 }
 
-.b-c {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Space between each b element */
-    background-color: rgb(255, 255, 255);
+/*FAQ start modify*/
+/* Base styles (Desktop) */
+.home-pakages {
+    padding: 30px 0;
+    background-color: #f9f9f9;
 }
 
-.b {
-    margin-left: 8cm;
-    background-color: rgb(235, 216, 235);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #333; /* Text color inside the boxes */
-    width: 65%; /* Ensures each box takes the full width of the container */
-}
-
-.b h3 {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-    color: #007bff; /* Color for the h3 inside each box */
-}
-
-.b {
-  /* Base styles for the job card */
- 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease; /* Smooth transition for zoom effect */
-}
-
-.b:hover {
-  transform: scale(1.1); /* Zoom in effect */
-}
-
-
-.load-more {
+.home-pakages .heading-title {
     text-align: center;
-    margin-top: 20px;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
 }
 
-.load-more a {
-    display: inline-block;
+.home-pakages .b-c {
+    display: grid;
+    grid-template-columns: repeat(3, 0.5fr); /* 2 columns on large screens */
+    gap: 50px; /* Reduced the gap between items */
+}
+
+.home-pakages .b {
+    background-color: rgb(235, 233, 233);
+    padding: 20px;
+    border-radius: 28px 0px 28px 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.home-pakages .b:hover {
+    transform: translateY(-15px);
+}
+
+.home-pakages .b h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+}
+
+.home-pakages .b p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.home-pakages .load-more {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.home-pakages .load-more a {
     padding: 10px 20px;
+    font-size: 1.2rem;
     background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
+    color: white;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease-in-out;
 }
 
-.load-more a:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+.home-pakages .load-more a:hover {
+    background-color: #0056b3;
 }
+
+/* Tablet view (768px to 1024px) */
+@media (max-width: 1024px) {
+    .home-pakages .b-c {
+        grid-template-columns: 1fr; /* 1 column for smaller screens */
+    }
+
+    .home-pakages .b {
+        padding: 15px;
+    }
+
+    .home-pakages .b h3 {
+        font-size: 1.4rem;
+    }
+
+    .home-pakages .b p {
+        font-size: 1.1rem;
+    }
+
+    .home-pakages .heading-title {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile view (up to 767px) */
+@media (max-width: 767px) {
+    .home-pakages {
+        padding: 30px 0;
+    }
+
+    .home-pakages .heading-title {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    .home-pakages .b {
+        padding: 10px;
+    }
+
+    .home-pakages .b h3 {
+        font-size: 1.2rem;
+    }
+
+    .home-pakages .b p {
+        font-size: 1rem;
+    }
+
+    .home-pakages .load-more a {
+        font-size: 1.1rem;
+        padding: 8px 15px;
+    }
+}
+
+/*FAQ end modify*/
 
 
 
@@ -529,6 +700,99 @@
         font-size: 3.5rem;
     }
 }
+
+/*chatbot responsiveness modift*/
+/* Mobile view (up to 600px) */
+@media (max-width: 600px) {
+    /* Chatbot */
+    .chatbot-icon {
+        font-size: 20px;
+        padding: 10px;
+        bottom: 10px; /* Positioned at the bottom */
+        right: 10px;
+    }
+
+    .iframe-container iframe {
+        width: 280px;
+        height: 350px;
+    }
+
+    /* .home-packages Section */
+    .home-packages .box-container {
+        grid-template-columns: 1fr; /* One column on mobile */
+    }
+
+    .home-packages .box {
+        padding: 15px; /* Reduce padding for smaller screens */
+    }
+
+    .home-packages .box h3 {
+        font-size: 1.5rem;
+    }
+
+    .home-packages .box p {
+        font-size: 1rem;
+    }
+
+    .home-packages .box .btn {
+        font-size: 1.2rem;
+    }
+}
+
+/* Tablet view (601px to 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+    /* Chatbot */
+    .chatbot-icon {
+        font-size: 24px;
+        padding: 15px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .iframe-container iframe {
+        width: 350px;
+        height: 400px;
+    }
+
+    /* .home-packages Section */
+    .home-packages .box-container {
+        grid-template-columns: 1fr 1fr; /* Two columns on tablet */
+    }
+
+    .home-packages .box {
+        padding: 20px;
+    }
+
+    .home-packages .box h3 {
+        font-size: 1.8rem;
+    }
+
+    .home-packages .box p {
+        font-size: 1.2rem;
+    }
+
+    .home-packages .box .btn {
+        font-size: 1.4rem;
+    }
+}
+
+/* Desktop view (above 900px) */
+@media (min-width: 901px) {
+    /* Chatbot */
+    .chatbot-icon {
+        font-size: 28px;
+        padding: 20px;
+        bottom: 30px;
+        right: 30px;
+    }
+
+    .iframe-container iframe {
+        width: 400px;
+        height: 450px;
+    }
+
+}
+/*chatbot modify*/
     </style>
 </head>
 <body>
@@ -595,8 +859,6 @@
                     
                 </div>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
         </div>
     </section>
     <!--home section end-->
@@ -697,7 +959,7 @@ You may be asked to verify your identity before the interview starts.</p>
                 These measures are in place to maintain a fair and secure testing environment.</p>
         </div>
     </div>
-        <div class="load-more"><a href="">load more</a></div>
+        
     </section>
     <!--FAQ section end-->
     <!--Review section-->
@@ -884,45 +1146,70 @@ You may be asked to verify your identity before the interview starts.</p>
             iframeContainer.style.display = "none";
         }
     }
-    let menu=document.querySelector('#menu-btn');
-let navbar = document.querySelector('.header .navbar');
-menu.onclick = () =>{
-menu.classList.toggle('fa-times');
-navbar.classList.toggle('active');
-};
-window.onscroll = () =>{
-    menu.classList.remove('fa-times');
-    navbar.classList.remove('active');
-    };
-    var swiper = new Swiper(".home-slider", {
-        loop:true,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+    // Initialize Swipers with Autoplay
+function homeautoplay()
+{
+  var swiperHome = new Swiper(".home-slider", {
+    loop: true,
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    autoplay: {
+        delay: 2500, // Delay in milliseconds between slides
+        disableOnInteraction: false, // Continue autoplay after user interactions
+    },
+    speed: 600, // Duration of transition in milliseconds (600ms for a smooth slide)
+  });
+}
+homeautoplay()
+function reviewautoplay()
+{
+  var swiperReviews = new Swiper(".reviews-slider", {
+    loop: true,
+    spaceBetween: 20,
+    autoHeight: true,
+    grabCursor: true,
+    breakpoints: {
+        640: {
+            slidesPerView: 1,
         },
-      });
-    
-      var swiper = new Swiper(".reviews-slider", {
-            loop:true,
-            spaceBetween: 20,
-            autoHeight: true,
-            grabCursor:true,
-            breakpoints: {
-                640: {
-                  slidesPerView: 1,
-                  
-                },
-                768: {
-                  slidesPerView: 2,
-                  
-                },
-                1024: {
-                  slidesPerView: 3,
-                  
-                },
-              },
-        }
-      );
+        768: {
+            slidesPerView: 2,
+        },
+        1024: {
+            slidesPerView: 3,
+        },
+    },
+    autoplay: {
+        delay: 1500, // Delay in milliseconds between slides
+        disableOnInteraction: false, // Continue autoplay after user interactions
+    },
+    speed: 600, // Duration of transition in milliseconds (600ms for a smooth slide)
+  });
+}
+reviewautoplay()
+
+function homeanimation()
+{
+// Menu toggle functionality
+let menu = document.querySelector('#menu-btn');
+let navbar = document.querySelector('.header .navbar');
+menu.onclick = () => {
+  menu.classList.toggle('fa-times');
+  navbar.classList.toggle('active');
+};
+
+// Remove menu active state on scroll
+window.onscroll = () => {
+  menu.classList.remove('fa-times');
+  navbar.classList.remove('active');
+};
+}
+
+homeanimation()
+
+
 </script>
    
       
