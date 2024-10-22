@@ -23,7 +23,7 @@ app.use('/auth', require('./routes/authRoutes'));
 // Frontend routes
 app.get('/', (req, res) => res.render('index'));
 app.get('/login', (req, res) => res.render('login'));
-app.get('/register', (req, res) => res.render('register'));
+// app.get('/register', (req, res) => res.render('register'));
 app.get('/home_student', (req, res) => res.render('home_student'));
 app.get('/quiz', (req, res) => res.render('quiz'));
 app.get('/vc', (req, res) => {
