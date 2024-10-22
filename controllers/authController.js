@@ -49,7 +49,7 @@ exports.loginUser = async (req, res) => {
       return res.status(400).json({ msg: 'Invalid credentials' });
     }
 
-    res.redirect('/dashboard'); // Redirect to dashboard after login
+    res.redirect('/home_student'); // Redirect to dashboard after login
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
