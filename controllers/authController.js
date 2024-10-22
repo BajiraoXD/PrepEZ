@@ -6,6 +6,7 @@ const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 exports.registerUser = async (req, res) => {
+  console.log(req.body);
   const { username, email, password } = req.body;
 
   try {
@@ -25,7 +26,7 @@ exports.registerUser = async (req, res) => {
     user.password = await bcrypt.hash(password, salt);
 
     await user.save();
-    res.redirect('/login');
+    res.redirect('/'); // Redirect back to login page after signup
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
@@ -48,7 +49,7 @@ exports.loginUser = async (req, res) => {
       return res.status(400).json({ msg: 'Invalid credentials' });
     }
 
-    res.redirect('/home_student'); // Redirect to dashboard or any page after login
+    res.redirect('/dashboard'); // Redirect to dashboard after login
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
