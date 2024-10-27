@@ -22,7 +22,7 @@ app.use('/auth', require('./routes/authRoutes'));
 
 // Frontend routes
 app.get('/', (req, res) => res.render('index'));
-app.get('login', (req, res) => res.render('login'));
+app.get('/login', (req, res) => res.render('login'));
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
