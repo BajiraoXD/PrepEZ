@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const connectDB = require('./config/db');
 require('dotenv').config();
 
@@ -13,7 +14,13 @@ app.use(express.urlencoded({ extended: false }));
 
 // Set view engine to EJS
 app.set('view engine', 'ejs');
-
+// Session middleware
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
 
 app.use(express.static('public'));
 
