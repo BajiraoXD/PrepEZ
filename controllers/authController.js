@@ -27,7 +27,7 @@ exports.registerUser = async (req, res) => {
         user.password = await bcrypt.hash(password, salt);
 
         await user.save();
-        res.redirect('/'); // Redirect back to login page after signup
+        res.redirect('/login'); // Redirect back to login page after signup
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
@@ -116,7 +116,7 @@ exports.registerT = async (req, res) => {
         teacher.password = await bcrypt.hash(password, sal);
 
         await teacher.save();
-        res.redirect('/'); // Redirect back to login page after signup
+        res.redirect('/tlogin'); // Redirect back to login page after signup
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
