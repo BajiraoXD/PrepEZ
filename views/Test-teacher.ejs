@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>about us</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+   <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap');
+
+:root{
+   --main-color:#8e44ad;
+   --red:#e74c3c;
+   --orange:#f39c12;
+   --light-color:#888;
+   --light-bg:#eee;
+   --black:#2c3e50;
+   --white:#fff;
+   --border:.1rem solid rgba(0,0,0,.2);
+}
+
+*{
+   font-family: 'Nunito', sans-serif;
+   margin:0; padding:0;
+   box-sizing: border-box;
+   outline: none; border:none;
+   text-decoration: none;
+}
+
+*::selection{
+   background-color: var(--main-color);
+   color:#fff;
+}
+
+html{
+   font-size: 62.5%;
+   overflow-x: hidden;
+}
+
+html::-webkit-scrollbar{
+   width: 1rem;
+   height: .5rem;
+}
+
+html::-webkit-scrollbar-track{
+   background-color: transparent;
+}
+
+html::-webkit-scrollbar-thumb{
+   background-color: var(--main-color);
+}
+
+body{
+   background-color: var(--light-bg);
+   padding-left: 30rem;
+}
+
+body.dark{
+   --light-color:#aaa;
+   --light-bg:#333;
+   --black:#fff;
+   --white:#222;
+   --border:.1rem solid rgba(255,255,255,.2);
+}
+
+body.active{
+   padding-left: 0;
+}
+
+section{
+   padding:2rem;
+   margin: 0 auto;
+   max-width: 1200px;
+}
+
+.heading{
+   font-size: 2.5rem;
+   color:var(--black);
+   margin-bottom: 2.5rem;
+   border-bottom: var(--border);
+   padding-bottom: 1.5rem;
+   text-transform: capitalize;
+}
+
+.inline-btn,
+.inline-option-btn,
+.inline-delete-btn,
+.btn,
+.delete-btn,
+.option-btn{
+   border-radius: .5rem;
+   color:#fff;
+   font-size: 1.8rem;
+   cursor: pointer;
+   text-transform: capitalize;
+   padding:1rem 3rem;
+   text-align: center;
+   margin-top: 1rem;
+}
+
+.btn,
+.delete-btn,
+.option-btn{
+   display: block;
+   width: 100%;
+}
+
+.inline-btn,
+.inline-option-btn,
+.inline-delete-btn{
+   display: inline-block;
+}
+
+.btn,
+.inline-btn{
+   background-color: var(--main-color);
+}
+
+.option-btn,
+.inline-option-btn{
+   background-color:#bea9fe;
+}
+
+.delete-btn,
+.inline-delete-btn{
+   background-color: var(--red);
+}
+
+.inline-btn:hover,
+.inline-option-btn:hover,
+.inline-delete-btn:hover,
+.btn:hover,
+.delete-btn:hover,
+.option-btn:hover{
+   background-color: #8065cf;
+   color: var(--white);
+}
+
+.flex-btn{
+   display: flex;
+   gap: 1rem;
+}
+
+.header{
+   position: sticky;
+   top:0; left:0; right: 0;
+   background-color: var(--white);
+   z-index: 1000;
+   border-bottom: var(--border);
+}
+
+.header .flex{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   position: relative;
+   padding: 1.5rem 2rem;
+}
+
+.header .flex .logo{
+   font-size: 2.5rem;
+   color: var(--black);
+}
+
+.header .flex .search-form{
+   width: 50rem;
+   border-radius: .5rem;
+   background-color: var(--light-bg);
+   padding:1.5rem 2rem;
+   display: flex;
+   gap:2rem;
+
+}
+
+.header .flex .search-form input{
+   width: 100%;
+   font-size: 1.8rem;
+   color:var(--black);
+   background:none;
+}
+
+.header .flex .search-form button{
+   background:none;
+   font-size: 2rem;
+   cursor: pointer;
+   color:var(--black);
+}
+
+.header .flex .search-form button:hover{
+   color: var(--main-color);
+}
+
+.header .flex .icons div{
+   font-size: 2rem;
+   color:var(--black);
+   background-color: var(--light-bg);
+   border-radius: .5rem;
+   height: 4.5rem;
+   width: 4.5rem;
+   line-height: 4.5rem;
+   cursor: pointer;
+   text-align: center;
+   margin-left: .7rem;
+}
+
+.header .flex .icons div:hover{
+   background-color: var(--black);
+   color:var(--white);
+}
+
+.header .flex .profile{
+   position: absolute;
+   top:120%; right: 2rem;
+   background-color: var(--white);
+   border-radius: .5rem;
+   padding: 1.5rem;
+   text-align: center;
+   overflow: hidden;
+   transform-origin: top right;
+   transform: scale(0);
+   transition: .2s linear;
+   width: 30rem;
+}
+
+.header .flex .profile.active{
+   transform: scale(1);
+}
+
+.header .flex .profile .image{
+   height: 10rem;
+   width: 10rem;
+   border-radius: 50%;
+   object-fit: contain;
+   margin-bottom: 1rem;
+}
+
+.header .flex .profile .name{
+   font-size: 2rem;
+   color:var(--black);
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+
+.header .flex .profile .role{
+   font-size: 1.8rem;
+   color: var(--light-color);
+}
+
+#search-btn{
+   display: none;
+   
+}
+
+.side-bar{
+   position: fixed;
+   top: 0; left: 0;
+   width: 30rem;
+   background-color: var(--white);
+   height: 100vh;
+   border-right: var(--border);
+   z-index: 1200;
+}
+
+.side-bar #close-btn{
+   text-align: right;
+   padding: 2rem;
+   display: none;
+}
+
+.side-bar #close-btn i{
+   text-align: right;
+   font-size: 2.5rem;
+   background:var(--red);
+   border-radius: .5rem;
+   color:var(--white);
+   cursor: pointer;
+   height: 4.5rem;
+   width: 4.5rem;
+   line-height: 4.5rem;
+   text-align: center;
+}
+
+.side-bar #close-btn i:hover{
+   background-color: var(--black);
+}
+
+.side-bar .profile{
+   padding:3rem 2rem;
+   text-align: center;
+}
+
+.side-bar .profile .image{
+   height: 10rem;
+   width: 10rem;
+   border-radius: 50%;
+   object-fit: contain;
+   margin-bottom: 1rem;
+}
+
+.side-bar .profile .name{
+   font-size: 2rem;
+   color:var(--black);
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+
+.side-bar .profile .role{
+   font-size: 1.8rem;
+   color: var(--light-color);
+}
+
+.side-bar .navbar a{
+   display: block;
+   padding: 2rem;
+   font-size: 2rem;
+}
+
+.side-bar .navbar a i{
+   margin-right: 1.5rem;
+   color:var(--main-color);
+   transition: .2s linear;
+}
+
+.side-bar .navbar a span{
+   color:var(--light-color);
+}
+
+.side-bar .navbar a:hover{
+   background-color: var(--light-bg);
+}
+
+.side-bar .navbar a:hover i{
+   margin-right: 2.5rem;
+}
+
+/*nav bar effect start*/
+/* Style for the navbar */
+.navbar a {
+   display: inline-block;
+   padding: 10px 20px;
+   margin: 5px;
+   text-decoration: none;
+   color: #333;
+   font-size: 16px;
+   background-color: #fff7f7;
+   border-radius: 10px;
+   transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar a i {
+   margin-right: 8px;
+}
+
+
+/* Hover effect */
+.navbar a:hover {
+   background-color: #4CAF50; /* Change background color on hover */
+   color: #fff; /* Change text color */
+   transform: translateY(-3px); /* Slight upward movement */
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow */
+}
+
+/* Style for span elements inside navbar links */
+.navbar span {
+   display: inline-block;
+    /* Default background color */
+   color: #000; /* Default text color */
+   padding: 5px 10px;
+   border-radius: 3px; /* Optional: rounded corners */
+   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for span elements */
+.navbar a:hover span {
+   
+   color: #8065cf; /* Text color on hover */
+}
+/*nav bar effect end*/
+
+.side-bar.active{
+   left: -30rem;
+}
+
+.home-grid .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, 27.5rem);
+   gap:1.5rem;
+   justify-content: center;
+   align-items: flex-start;
+}
+
+.home-grid .box-container .box{
+   background-color: var(--white);
+   border-radius: .5rem;
+   padding:2rem;
+}
+
+.home-grid .box-container .box .title{
+   font-size: 2rem;
+   color: var(--black);
+   text-transform: capitalize;
+}
+
+.home-grid .box-container .box .flex{
+   display: flex;
+   flex-wrap: wrap;
+   gap: 1.5rem;
+   margin-top: 2rem;
+}
+
+.home-grid .box-container .flex a{
+   background-color: var(--light-bg);
+   border-radius: .5rem;
+   padding: 1rem 1.5rem;
+   font-size: 1.5rem;
+}
+
+.home-grid .box-container .flex a i{
+   margin-right: 1rem;
+   color:var(--black);
+}
+
+.home-grid .box-container .flex a span{
+   color:var(--light-color);
+}
+
+.home-grid .box-container .flex a:hover{
+   background-color: var(--black);
+}
+
+.home-grid .box-container .flex a:hover span{
+   color:var(--white);
+}
+
+.home-grid .box-container .flex a:hover i{
+   color:var(--white);
+}
+
+.home-grid .box-container .tutor{
+   padding: 1rem 0;
+   font-size: 1.8rem;
+   color:var(--light-color);
+   line-height: 2;
+}
+
+.home-grid .box-container .likes{
+   color:var(--light-color);
+   font-size: 1.7rem;
+   margin-top: 1.5rem;
+}
+
+.home-grid .box-container .likes span{
+   color:var(--main-color);
+}
+
+.about .row{
+   display: flex;
+   align-items: center;
+   flex-wrap: wrap;
+   gap:1.5rem;
+}
+
+.about .row .image{
+   flex: 1 1 40rem;
+}
+
+.about .row .image img{
+   width: 100%;
+   height: 50rem;
+}
+
+.about .row .content{
+   flex: 1 1 40rem;
+}
+
+.about .row .content p{
+   font-size: 1.7rem;
+   line-height: 2;
+   color: var(--light-color);
+   padding: 1rem 0;
+}
+
+.about .row .content h3{
+   font-size: 3rem;
+   color:var(--black);
+   text-transform: capitalize;
+}
+
+.about .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+   gap:1.5rem;
+   justify-content: center;
+   align-items: flex-start;
+   margin-top: 3rem;
+}
+
+.about .box-container .box{
+   border-radius: .5rem;
+   background-color: var(--white);
+   padding: 2rem;
+   display: flex;
+   align-items: center;
+   gap: 2.5rem;
+}
+
+.about .box-container .box i{
+   font-size: 4rem;
+   color: var(--main-color);
+}
+
+.about .box-container .box h3{
+   font-size: 2.5rem;
+   color: var(--black);
+   margin-bottom: .3rem;
+}
+
+.about .box-container .box p{
+   font-size: 1.7rem;
+   color:var(--light-color);
+}
+
+.reviews .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+   gap:1.5rem;
+   justify-content: center;
+   align-items: flex-start;
+}
+
+.reviews .box-container .box{
+   border-radius: .5rem;
+   background-color: var(--white);
+   padding: 2rem;
+}
+
+.reviews .box-container .box p{
+   line-height: 1.7;
+   font-size: 1.7rem;
+   color: var(--light-color);
+}
+
+.reviews .box-container .box .student{
+   margin-top: 2rem;
+   display: flex;
+   align-items: center;
+   gap: 1.5rem;
+}
+
+.reviews .box-container .box .student img{
+   height: 5rem;
+   width: 5rem;
+   object-fit: cover;
+   border-radius: 50%;
+}
+
+.reviews .box-container .box .student h3{
+   font-size: 2rem;
+   color: var(--black);
+   margin-bottom: .3rem;
+}
+
+.reviews .box-container .box .student .stars{
+   font-size: 1.5rem;
+   color:var(--orange);
+}
+
+.courses .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+   gap:1.5rem;
+   justify-content: center;
+   align-items: flex-start;
+}
+
+.courses .box-container .box{
+   border-radius: 2rem;
+   background-color: rgb(255, 255, 255);
+   
+   padding: 2rem;
+   
+}
+
+.courses .box-container .box .tutor{
+   display: flex;
+   align-items: center;
+   gap: 1.5rem;
+   margin-bottom: 2.5rem;
+}
+
+.courses .box-container .box .tutor img{
+   height: 5rem;
+   width: 5rem;
+   border-radius: 50%;
+   object-fit: cover;
+}
+
+.courses .box-container .box .tutor h3{
+   font-size: 1.8rem;
+   color: var(--black);
+   margin-bottom: .2rem;
+}
+
+.courses .box-container .box .tutor span{
+   font-size: 1.3rem;
+   color:var(--light-color);
+}
+
+.courses .box-container .box .thumb{
+   position: relative;
+}
+
+.courses .box-container .box .thumb span{
+   position: absolute;
+   top:1rem; left: 1rem;
+   border-radius: .5rem;
+   padding: .5rem 1.5rem;
+   background-color: rgba(0,0,0,.3);
+   color: #fff;
+   font-size: 1.5rem;
+}
+
+.courses .box-container .box .thumb img{
+   width: 100%;
+   height: 20rem;
+   object-fit: cover;
+   border-radius: .5rem;
+}
+
+.courses .box-container .box .title{
+   font-size: 2rem;
+   color: var(--black);
+   padding-bottom: .5rem;
+   padding-top: 1rem;
+}
+
+.courses .more-btn{
+   text-align: center;
+   margin-top: 2rem;
+}
+/*course zoom effect start*/
+.courses .box-container .box {
+   transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.courses .box-container .box:hover {
+   transform: scale(1.05); /* Slight zoom effect on hover */
+}
+/*course zoom effect end*/
+
+.inline-btn {
+   display: inline-block;
+   padding: 5px 10px;  /* Reduced padding for smaller size */
+   border-radius: 25px;  /* Adjusted for the smaller button */
+   border-color: #bea9fe;
+   background-color: white;
+   color: #2a2828;
+   text-decoration: none;
+   font-weight: bold;
+   transition: background-color 0.3s ease, transform 0.3s ease;
+   border: 0.1px solid #2a2929;
+   display: flex;
+   justify-content: center; /* Centers text horizontally */
+   align-items: center;
+   font-size: 1.5rem;  /* Smaller font size */
+   height: 40px;
+   width: 150px;  /* Set a fixed width for the button */
+   margin: 0 auto;  /* Centers the button horizontally */
+}
+
+.inline-btn:hover {
+   background-color: #B197FC;
+   border: 0px;
+   transform: scale(1.1);
+}
+
+.playlist-details .row{
+   display: flex;
+   align-items: flex-end;
+   gap:3rem;
+   flex-wrap: wrap;
+   background-color: var(--white);
+   padding: 2rem;
+}
+
+.playlist-details .row .column{
+   flex: 1 1 40rem;
+}
+
+.playlist-details .row .column .save-playlist{
+   margin-bottom: 1.5rem;
+}
+
+.playlist-details .row .column .save-playlist button{
+   border-radius: .5rem;
+   background-color: var(--light-bg);
+   padding:1rem 1.5rem;
+   cursor: pointer;
+}
+
+.playlist-details .row .column .save-playlist button i{
+   font-size: 2rem;
+   color:var(--black);
+   margin-right: .8rem;
+}
+
+.playlist-details .row .column .save-playlist button span{
+   font-size: 1.8rem;
+   color:var(--light-color);
+}
+
+.playlist-details .row .column .save-playlist button:hover{
+   background-color: var(--black);
+}
+
+.playlist-details .row .column .save-playlist button:hover i{
+   color:var(--white);
+}
+
+.playlist-details .row .column .save-playlist button:hover span{
+   color:var(--white);
+}
+
+.playlist-details .row .column .thumb{
+   position: relative;
+}
+
+.playlist-details .row .column .thumb span{
+   font-size: 1.8rem;
+   color: #fff;
+   background-color: rgba(0,0,0,.3);
+   border-radius: .5rem;
+   position: absolute;
+   top: 1rem; left: 1rem;
+   padding: .5rem 1.5rem;
+}
+
+.playlist-details .row .column .thumb img{
+   height: 30rem;
+   width: 100%;
+   object-fit: cover;
+   border-radius: .5rem;
+}
+
+.playlist-details .row .column .tutor{
+   display: flex;
+   align-items: center;
+   gap: 2rem;
+   margin-bottom: 2rem;
+}
+
+.playlist-details .row .column .tutor img{
+   height: 7rem;
+   width: 7rem;
+   border-radius: 50%;
+   object-fit: cover;
+}
+
+.playlist-details .row .column .tutor h3{
+   font-size: 2rem;
+   color:var(--black);
+   margin-bottom: .2rem;
+}
+
+.playlist-details .row .column .tutor span{
+   font-size: 1.5rem;
+   color: var(--light-color);
+}
+
+.playlist-details .row .column .details h3{
+   font-size: 2rem;
+   color: var(--black);
+   text-transform: capitalize;
+}
+
+.playlist-details .row .column .details p{
+   padding: 1rem 0;
+   line-height: 2;
+   font-size: 1.8rem;
+   color: var(--light-color);
+}
+
+.playlist-videos .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+   gap:1.5rem;
+   justify-content: center;
+   align-items: flex-start;
+}
+
+.playlist-videos .box-container .box{
+   background-color: var(--white);
+   border-radius: .5rem;
+   padding: 2rem;
+   position: relative;
+}
+
+.playlist-videos .box-container .box i{
+   position: absolute;
+   top: 2rem; left: 2rem; right: 2rem;
+   height: 20rem;
+   border-radius: .5rem;
+   background-color: rgba(0,0,0,.3);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 5rem;
+   color: #fff;
+   display: none;
+}
+
+.playlist-videos .box-container .box:hover i{
+   display: flex;
+}
+
+.playlist-videos .box-container .box img{
+   width: 100%;
+   height: 20rem;
+   object-fit: cover;
+   border-radius: .5rem;
+}
+
+.playlist-videos .box-container .box h3{
+   margin-top: 1.5rem;
+   font-size: 1.8rem;
+   color: var(--black);
+}
+
+.playlist-videos .box-container .box:hover h3{
+   color: var(--main-color);
+}
+
+.watch-video .video-container{
+   background-color: var(--white);
+   border-radius: .5rem;
+   padding: 2rem;
+}
+
+.watch-video .video-container .video{
+   position: relative;
+   margin-bottom: 1.5rem;
+}
+
+.watch-video .video-container .video video{
+   border-radius: .5rem;
+   width: 100%;
+   object-fit: contain;
+   background-color: #000;
+}
+
+.watch-video .video-container .title{
+   font-size: 2rem;
+   color: var(--black);
+}
+
+.watch-video .video-container .info{
+   display: flex;
+   margin-top: 1.5rem;
+   margin-bottom: 2rem;
+   border-bottom: var(--border);
+   padding-bottom: 1.5rem;
+   gap: 2.5rem;
+   align-items: center;
+}
+
+.watch-video .video-container .info p{
+   font-size: 1.6rem;
+}
+
+.watch-video .video-container .info p span{
+   color: var(--light-color);
+}
+
+.watch-video .video-container .info i{
+   margin-right: 1rem;
+   color: var(--main-color);
+}
+
+.watch-video .video-container .tutor{
+   display: flex;
+   align-items: center;
+   gap: 2rem;
+   margin-bottom: 1rem;
+}
+
+.watch-video .video-container .tutor img{
+   border-radius: 50%;
+   height: 5rem;
+   width: 5rem;
+   object-fit: cover;
+}
+
+.watch-video .video-container .tutor h3{
+   font-size: 2rem;
+   color: var(--black);
+   margin-bottom: .2rem;
+}
+
+.watch-video .video-container .tutor span{
+   font-size: 1.5rem;
+   color: var(--light-color);
+}
+
+.watch-video .video-container .flex{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 1.5rem;
+}
+
+.watch-video .video-container .flex button{
+   border-radius: .5rem;
+   padding: 1rem 1.5rem;
+   font-size: 1.8rem;
+   cursor: pointer;
+   background-color: var(--light-bg);
+}
+
+.watch-video .video-container .flex button i{
+   margin-right: 1rem;
+   color: var(--black);
+}
+
+.watch-video .video-container .flex button span{
+   color: var(--light-color);
+}
+
+.watch-video .video-container .flex button:hover{
+   background-color: var(--black);
+}
+
+.watch-video .video-container .flex button:hover i{
+   color: var(--white);
+}
+
+.watch-video .video-container .flex button:hover span{
+   color: var(--white);
+}
+
+.watch-video .video-container .description{
+   line-height: 1.5;
+   font-size: 1.7rem;
+   color: var(--light-color);
+   margin-top: 2rem;
+}
+
+.comments .add-comment{
+   background-color: var(--white);
+   border-radius: .5rem;
+   padding: 2rem;
+   margin-bottom: 3rem;
+}
+
+.comments .add-comment h3{
+   font-size: 2rem;
+   color: var(--black);
+   margin-bottom: 1rem;
+}
+
+.comments .add-comment textarea{
+   height: 20rem;
+   resize: none;
+   background-color: var(--light-bg);
+   border-radius: .5rem;
+   border: var(--border);
+   padding: 1.4rem;
+   font-size: 1.8rem;
+   color: var(--black);
+   width: 100%;
+   margin: .5rem 0;
+}
+
+.comments .box-container{
+   display: grid;
+   gap: 2.5rem;
+   background-color: var(--white);
+   padding: 2rem;
+   border-radius: .5rem;
+}
+
+.comments .box-container .box .user{
+   display: flex;
+   align-items: center;
+   gap: 1.5rem;
+   margin-bottom: 2rem;
+}
+
+.comments .box-container .box .user img{
+   height: 5rem;
+   width: 5rem;
+   border-radius: 50%;
+}
+
+.comments .box-container .box .user h3{
+   font-size: 2rem;
+   color: var(--black);
+   margin-bottom: .2rem;
+}
+
+.comments .box-container .box .user span{
+   font-size: 1.5rem;
+   color: var(--light-color);
+}
+
+.comments .box-container .box .comment-box{
+   border-radius: .5rem;
+   background-color: var(--light-bg);
+   padding:1rem 1.5rem;
+   white-space: pre-line;
+   margin: .5rem 0;
+   font-size: 1.8rem;
+   color: var(--black);
+   line-height: 1.5;
+   position: relative;
+   z-index: 0;
+}
+
+.comments .box-container .box .comment-box::before{
+   content: '';
+   position: absolute;
+   top: -1rem; left: 1.5rem;
+   background-color: var(--light-bg);
+   height: 1.2rem;
+   width: 2rem;
+   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.teachers .search-tutor{
+   margin-bottom: 2rem;
+   border-radius: .5rem;
+   background-color: var(--white);
+   padding: 1.5rem 2rem;
+   display: flex;
+   align-items: center;
+   gap: 1.5rem;
+}
+
+.teachers .search-tutor input{
+   width: 100%;
+   background: none;
+   font-size: 1.8rem;
+   color: var(--black);
+}
+
+.teachers .search-tutor button{
+   font-size: 2rem;
+   color: var(--black);
+   cursor: pointer;
+   background:none;
+}
+
+.teachers .search-tutor button:hover{
+   color: var(--main-color);
+}
+
+.teachers .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+   gap:1.5rem;
+   justify-content: center;
+   align-items: flex-start;
+}
+
+.teachers .box-container .box{
+   background-color: var(--white);
+   border-radius: .5rem;
+   padding: 2rem;
+}
+
+.teachers .box-container .offer{
+   text-align: center;
+}
+
+.teachers .box-container .offer h3{
+   font-size: 2.5rem;
+   color: var(--black);
+   text-transform: capitalize;
+   padding-bottom: .5rem;
+}
+
+.teachers .box-container .offer p{
+   line-height: 1.7;
+   padding: .5rem 0;
+   color: var(--light-color);
+   font-size: 1.7rem;
+}
+
+.teachers .box-container .box .tutor{
+   display: flex;
+   align-items: center;
+   gap:2rem;
+   margin-bottom: 1.5rem;
+}
+
+.teachers .box-container .box .tutor img{
+   height: 5rem;
+   width: 5rem;
+   border-radius: 50%;
+}
+
+.teachers .box-container .box .tutor h3{
+   font-size: 2rem;
+   color: var(--black);
+   margin-bottom: .2rem;
+}
+
+.teachers .box-container .box .tutor span{
+   font-size: 1.6rem;
+   color: var(--light-color);
+}
+
+.teachers .box-container .box p{
+   padding: .5rem 0;
+   font-size: 1.7rem;
+   color: var(--light-color);
+}
+
+.teachers .box-container .box p span{
+   color: var(--main-color);
+}
+
+.teacher-profile .details{
+   text-align: center;
+   background-color: var(--white);
+   border-radius: .5rem;
+   padding: 2rem;
+}
+
+.teacher-profile .details .tutor img{
+   height: 10rem;
+   width: 10rem;
+   border-radius: 50%;
+   object-fit: cover;
+   margin-bottom: 1rem;
+}
+
+.teacher-profile .details .tutor h3{
+   font-size: 2rem;
+   color: var(--black);
+}
+
+.teacher-profile .details .tutor span{
+   color: var(--light-color);
+   font-size: 1.7rem;
+}
+
+.teacher-profile .details .flex{
+   display: flex;
+   flex-wrap: wrap;
+   gap: 1.5rem;
+   margin-top: 2rem;
+}
+
+.teacher-profile .details .flex p{
+   flex: 1 1 20rem;
+   border-radius: .5rem;
+   background-color: var(--light-bg);
+   padding: 1.2rem 2rem;
+   font-size: 1.8rem;
+   color: var(--light-color);
+}
+
+.teacher-profile .details .flex p span{
+   color: var(--main-color);
+}
+
+.user-profile .info{
+   background-color: var(--white);
+   border-radius: .5rem;
+   padding: 2rem;
+}
+
+.user-profile .info .user{
+   text-align: center;
+   margin-bottom: 2rem;
+   padding: 1rem;
+}
+
+.user-profile .info .user img{
+   height: 10rem;
+   width: 10rem;
+   border-radius: 50%;
+   object-fit: cover;
+   margin-bottom: 1rem;
+}
+
+.user-profile .info .user h3{
+   font-size: 2rem;
+   color: var(--black);
+}
+
+.user-profile .info .user p{
+   font-size: 1.7rem;
+   color: var(--light-color);
+   padding: .3rem 0;
+}
+
+.user-profile .info .box-container{
+   display: flex;
+   flex-wrap: wrap;
+   gap: 1.5rem;
+}
+
+.user-profile .info .box-container .box{
+   background-color: var(--light-bg);
+   border-radius: .5rem;
+   padding: 2rem;
+   flex: 1 1 25rem;
+}
+
+.user-profile .info .box-container .box .flex{
+   display: flex;
+   align-items: center;
+   gap: 2rem;
+   margin-bottom: 1rem;
+}
+
+.user-profile .info .box-container .box .flex i{
+   font-size:2rem;
+   color: var(--white);
+   background-color: var(--black);
+   text-align: center;
+   border-radius: .5rem;
+   height: 5rem;
+   width: 5rem;
+   line-height: 4.9rem;
+}
+
+.user-profile .info .box-container .box .flex span{
+   font-size: 2.5rem;
+   color: var(--main-color);
+}
+
+.user-profile .info .box-container .box .flex p{
+   color: var(--light-color);
+   font-size: 1.7rem;
+}
+
+
+.form-container{
+   min-height: calc(100vh - 20rem);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.form-container form{
+   background-color: var(--white);
+   border-radius: .5rem;
+   padding: 2rem;
+   width: 50rem;
+}
+
+.form-container form h3{
+   font-size: 2.5rem;
+   text-transform: capitalize;
+   color: var(--black);
+   text-align: center;
+}
+
+.form-container form p{
+   font-size: 1.7rem;
+   color: var(--light-color);
+   padding-top: 1rem;
+}
+
+.form-container form p span{
+   color: var(--red);
+}
+
+.form-container form .box{
+   font-size: 1.8rem;
+   color: var(--black);
+   border-radius: .5rem;
+   padding: 1.4rem;
+   background-color: var(--light-bg);
+   width: 100%;
+   margin: 1rem 0;
+}
+
+
+
+@media (max-width:1200px){
+
+   body{
+      padding-left: 0;
+   }
+
+   .side-bar{
+      left: -30rem;
+      transition: .2s linear;
+   }
+
+   .side-bar #close-btn{
+      display: block;
+   }
+
+   .side-bar.active{
+      left: 0;
+      box-shadow: 0 0 0 100vw rgba(0,0,0,.8);
+      border-right: 0;
+   }
+
+}
+
+@media (max-width:991px){
+
+   html{
+      font-size: 55%;
+   }
+
+}
+
+@media (max-width:768px){
+
+   #search-btn{
+      display: inline-block;
+      
+   }
+
+   .header .flex .search-form{
+      position: absolute;
+      top: 99%; left: 0; right: 0;
+      border-top: var(--border);
+      border-bottom: var(--border);
+      background-color: var(--white);
+      border-radius: 0;
+      width: auto;
+      padding: 2rem;
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+      transition: .2s linear;
+   }
+
+   .header .flex .search-form.active{
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+   }
+
+}
+
+@media (max-width:450px){
+
+   html{
+      font-size: 50%;
+   }
+
+   .flex-btn{
+      gap: 0;
+      flex-flow: column;
+   }
+
+   .home-grid .box-container{
+      grid-template-columns: 1fr;
+   }
+
+   .about .row .image img{
+      height: 25rem;
+   }
+
+}
+
+
+
+
+
+
+
+      /*Test form making start*/
+      body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+#container {
+    display: flex;
+    flex-direction: row; /* Use row layout */
+    flex-wrap: nowrap; /* Prevent wrapping */
+    max-width: 1200px;
+    margin: auto;
+}
+
+#options {
+    width: 200px;
+    margin-right: 20px;
+    position: sticky; /* Keep it in view while scrolling */
+    top: 20px; /* Distance from the top of the viewport */
+}
+
+#custom-form {
+    flex: 1; /* Allow form to take remaining space */
+    overflow-y: auto; /* Enable scrolling within the form */
+    max-height: calc(100vh - 40px); /* Max height for the form */
+    padding-left: 20px; /* Adjust padding for spacing */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    background: white;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 2rem;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+.b1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+ .b1:hover {
+    background-color: #40af5a;
+}
+
+#success-message {
+    display: none;
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    #container {
+        flex-direction: column; /* Stack elements vertically */
+    }
+
+    #options {
+        width: 100%; /* Full width on small screens */
+        margin: 0 0 20px 0; /* Remove right margin, add bottom margin */
+    }
+
+    #custom-form {
+        padding-left: 0; /* Remove left padding */
+        max-height: none; /* Remove max-height to show all content */
+    }
+
+    button {
+        width: 100%; /* Full width for buttons */
+    }
+
+    .input-group {
+        padding: 15px; /* Adjust padding */
+    }
+}
+
+.error-message {
+    color: red; /* Red color for error messages */
+    font-size: 12px; /* Adjust font size as needed */
+    margin-top: -8px; /* Adjust margin */
+    margin-bottom: 10px; /* Space below the message */
+}
+
+#options {
+    width: 200px;
+    margin-right: 20px;
+    position: sticky;
+    top: 20px;
+}
+
+.question-buttons {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 10px; /* Space between buttons */
+}
+
+.question-buttons button {
+    padding: 10px 15px; /* Add padding for a better look */
+    background-color: #007BFF; /* Button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: transform 0.2s ease; /* Smooth transition for zoom effect */
+    margin: 10px;
+}
+
+.question-buttons button:hover {
+    transform: scale(1.1); /* Zoom effect on hover */
+}
+
+.count-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center the text */
+    flex: 1; /* Make count cards flexible */
+    min-width: 150px; /* Minimum width for cards */
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+    .count-card {
+        width: 100%; /* Full width for count cards */
+        margin-bottom: 10px; /* Space between count cards */
+    }
+
+    .question-buttons {
+        width: 100%; /* Full width for buttons */
+    }
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for responsiveness */
+    max-width: 1200px;
+    margin: auto;
+}
+
+#options {
+    width: 250px; /* Default width for larger screens */
+    margin-right: 20px;
+    position: sticky; /* Keep it in view while scrolling */
+    top: 20px;
+}
+
+.question-buttons {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 10px; /* Space between buttons */
+}
+
+.question-buttons button {
+    padding: 10px 15px; /* Add padding for a better look */
+    background-color: #007BFF; /* Button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: transform 0.2s ease; /* Smooth transition for zoom effect */
+}
+
+.question-buttons button:hover {
+    transform: scale(1.1); /* Zoom effect on hover */
+}
+
+.count-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center the text */
+    flex: 1; /* Make count cards flexible */
+    min-width: 150px; /* Minimum width for cards */
+}
+
+/* Count section flex layout */
+.count {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack count cards vertically */
+    gap: 15px; /* Space between count cards */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    #options {
+        width: 100%; /* Full width on small screens */
+        margin-right: 0; /* Remove right margin */
+        margin-bottom: 20px; /* Add bottom margin */
+    }
+
+    .count {
+        flex-direction: row; /* Align count cards in a row */
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        justify-content: space-between; /* Distribute space between cards */
+    }
+
+    .count-card {
+        flex: 1; /* Make count cards flexible */
+        min-width: 120px; /* Set a minimum width for cards */
+    }
+
+    .question-buttons {
+        width: 100%; /* Full width for buttons */
+    }
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center; /* This centers the button horizontally */
+    margin-top: 20px; /* Add margin above */
+}
+
+
+      /*Test form making end*/
+
+
+
+
+
+
+
+
+
+
+
+
+      body {
+    font-family: Arial, sans-serif; /* Change the font if needed */
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    max-width: 900px; /* Limit the width */
+    margin: 20px auto; /* Center the container */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 4rem; /* Larger font size for the heading */
+    margin-bottom: 20px;
+    text-align: center; /* Center the heading */
+}
+
+.question-buttons {
+    display: flex; /* Align buttons in a row */
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+}
+
+.button {
+    padding: 10px 15px;
+    font-size: 1.1rem; /* Bigger font size for buttons */
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Green color for buttons */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px;
+}
+
+.button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.count {
+    display: flex;
+    justify-content: space-around; /* Space out count cards */
+    margin: 30px 0;
+}
+
+.count-card p {
+    font-size: 1.2rem; /* Larger font size for count cards */
+    margin: 0; /* Remove default margin */
+}
+
+.form-field {
+    margin: 15px 0;
+}
+
+.form-field label {
+    display: block;
+    font-size: 1.8rem; /* Bigger font size for labels */
+    margin-bottom: 5px;
+}
+
+.form-field input {
+    width: 100%;
+    padding: 10px; /* Increased padding for better usability */
+    font-size: 1.5rem; /* Bigger font size for input fields */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-button {
+    text-align: center; /* Center submit button */
+}
+
+.submit-button .inline-btn {
+    padding: 10px 20px;
+    font-size: 1.2rem; /* Bigger font size for submit button */
+    background-color: #007BFF; /* Blue color for submit button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button .inline-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    h2 {
+        font-size: 1.5rem; /* Adjust heading font size */
+    }
+
+    .count-card p {
+        font-size: 1rem; /* Adjust font size for smaller screens */
+    }
+
+    .form-field label,
+    .form-field input,
+    .submit-button .inline-btn {
+        font-size: 1rem; /* Consistent font size on small screens */
+    }
+}
+
+   </style>
+
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="/teachers-home" class="logo">PrepEz</a>
+
+      <form action="search.html" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"></h3>
+         <p class="role">student</p>
+         <a href="/teacher_profile" class="btn">view profile</a>
+         <div class="flex-btn">
+            <a href="/tlogin" class="option-btn">login</a>
+            <a href="/tlogin" class="option-btn">register</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <!-- <img src="images/pic-5.jpg" class="image" alt="">
+      <h3 class="name">Sagnik Chandra</h3>
+      <p class="role">student</p> -->
+      <a href="/profile" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+      <a href="/teachers-home"><i class="fas fa-home"></i><span>home</span></a>
+      <a href="/courses"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+      <a href="/Test-teacher"><i class="fas fa-pencil"></i><span>Test</span></a>
+      <a href="/Interview"><i class="fas fa-user-tie"></i><span>Interview</span></a>
+      <a href="/contact"><i class="fas fa-headset"></i><span>contact us</span></a>
+      <a href="/logout"><i class="fas fa-sign-out-alt"></i><span>Log out</span></a>
+  </nav>
+
+</div>
+
+<section class="about">
+
+   <div class="row">
+
+      <div class="image">
+         <img src="test.png" alt="">
+      </div>
+
+      <div class="content">
+         <h3>Dynamic Text Creation and Management Tool</h3>
+         <p>Our platform empowers teachers to easily create and manage tests by adding custom questions along with their corresponding answers. Whether it’s a multiple-choice test or a text-based quiz, teachers can dynamically add, edit, or remove questions and specify the correct answers in real-time. With intuitive error handling and responsive design, creating tests has never been simpler or more efficient.</p>
+         
+      </div>
+
+   </div>
+
+   <div id="container">
+      <div id="options">
+          <div class="question-buttons">
+              <button type="button" onclick="addTextField()">Add Text</button>
+              <button type="button" onclick="addMultipleChoice()">Add MCQ</button>
+              <button type="button" onclick="addMultipleSelect()">Add MSQ</button>
+          </div>
+          
+          <div class="count">
+              <div class="count-card">
+                  <p>Text Questions: <span id="textCount">0</span></p>
+              </div>
+              <div class="count-card">
+                  <p>MCQs: <span id="mcqCount">0</span></p>
+              </div>
+              <div class="count-card">
+                  <p>MSQs: <span id="msqCount">0</span></p>
+              </div>
+              <div class="count-card">
+                  <p>Total Questions: <span id="totalCount">0</span></p>
+              </div>
+          </div>
+      </div>
+      
+      <form id="custom-form">
+          <h2>Create a Test</h2>
+          <div class="form-field">
+            <label for="test-date">Date:</label>
+            <input type="date" id="test-date" name="test-date" required>
+        </div>
+
+        <div class="form-field">
+            <label for="test-time">Time:</label>
+            <input type="time" id="test-time" name="test-time" required>
+        </div>
+
+        <div class="form-field">
+            <label for="exam-time-span">Exam Time Span:</label>
+            <input type="text" id="exam-time-span" name="exam-time-span" placeholder="In minutes" required>
+        </div>
+          <!-- Dynamic inputs will be added here -->
+          
+   </div>
+   <div id="success-message">SUCCESSFUL!</div>
+          <div class="submit-button" class="b2" >
+              <button class="inline-btn" type="button" onclick="validateAndSubmit()">Submit Test</button>
+              
+      </form>
+  </div>
+  
+
+
+</section>
+
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+   
+
+
+
+
+
+
+
+
+
+<script>
+   let textCount = 0;
+   let mcqCount = 0;
+   let msqCount = 0;
+   
+   function addTextField() {
+       const form = document.getElementById('custom-form');
+       const newField = document.createElement('div');
+       newField.classList.add('input-group');
+       newField.innerHTML = `
+           <label>Text Question:</label>
+           <input type="text" name="text_question_${++textCount}" placeholder="Enter your question" required>
+           <input type="text" name="correct_answer_${textCount}" placeholder="Enter the correct answer" required>
+           <span class="error-message" id="error-text-${textCount}"></span>
+           <i class="fas fa-trash-alt recycling-bin" onclick="removeField(this, 'text')"></i>
+       `;
+       form.appendChild(newField);
+       updateCounts();
+   }
+   
+   function addMultipleChoice() {
+       const form = document.getElementById('custom-form');
+       const newField = document.createElement('div');
+       newField.classList.add('input-group');
+       newField.innerHTML = `
+           <label>MCQ Question:</label>
+           <input type="text" name="mcq_question_${++mcqCount}" placeholder="Enter your question" required>
+           <div class="option-group">
+               <input type="text" name="mcq_option_${mcqCount}_1" placeholder="Option 1" required>
+               <input type="text" name="mcq_option_${mcqCount}_2" placeholder="Option 2" required>
+               <input type="text" name="mcq_option_${mcqCount}_3" placeholder="Option 3" required>
+               <button type="button" onclick="addMcqOption(this)">Add Option</button>
+           </div>
+           <input type="number" name="mcq_correct_answer_${mcqCount}" placeholder="Enter the correct option number" required>
+           <span class="error-message" id="error-mcq-${mcqCount}"></span>
+           <i class="fas fa-trash-alt recycling-bin" onclick="removeField(this, 'mcq')"></i>
+       `;
+       form.appendChild(newField);
+       updateCounts();
+   }
+   
+   function addMultipleSelect() {
+       const form = document.getElementById('custom-form');
+       const newField = document.createElement('div');
+       newField.classList.add('input-group');
+       newField.innerHTML = `
+           <label>MSQ Question:</label>
+           <input type="text" name="msq_question_${++msqCount}" placeholder="Enter your question" required>
+           <div class="option-group">
+               <input type="text" name="msq_option_${msqCount}_1" placeholder="Option 1" required>
+               <input type="text" name="msq_option_${msqCount}_2" placeholder="Option 2" required>
+               <input type="text" name="msq_option_${msqCount}_3" placeholder="Option 3" required>
+               <button type="button" onclick="addMsqOption(this)">Add Option</button>
+           </div>
+           <input type="text" name="msq_correct_answers_${msqCount}" placeholder="Enter correct options (comma-separated)" required>
+           <span class="error-message" id="error-msq-${msqCount}"></span>
+           <i class="fas fa-trash-alt recycling-bin" onclick="removeField(this, 'msq')"></i>
+       `;
+       form.appendChild(newField);
+       updateCounts();
+   }
+   
+   function addMcqOption(button) {
+       const optionGroup = button.parentNode;
+       const optionCount = optionGroup.querySelectorAll('input[type="text"]').length + 1;
+       const newOption = document.createElement('input');
+       newOption.type = 'text';
+       newOption.name = `mcq_option_${Math.ceil(optionCount / 3)}_${optionCount}`;
+       newOption.placeholder = `Option ${optionCount}`;
+       newOption.required = true;
+       optionGroup.appendChild(newOption);
+   }
+   
+   function addMsqOption(button) {
+       const optionGroup = button.parentNode;
+       const optionCount = optionGroup.querySelectorAll('input[type="text"]').length + 1;
+       const newOption = document.createElement('input');
+       newOption.type = 'text';
+       newOption.name = `msq_option_${Math.ceil(optionCount / 3)}_${optionCount}`;
+       newOption.placeholder = `Option ${optionCount}`;
+       newOption.required = true;
+       optionGroup.appendChild(newOption);
+   }
+   
+   function removeField(element, type) {
+       const field = element.parentNode;
+       field.parentNode.removeChild(field);
+   
+       // Decrease the count based on the type
+       if (type === 'text') {
+           textCount--;
+       } else if (type === 'mcq') {
+           mcqCount--;
+       } else if (type === 'msq') {
+           msqCount--;
+       }
+       
+       updateCounts();
+   }
+   
+   function updateCounts() {
+       document.getElementById('textCount').textContent = textCount;
+       document.getElementById('mcqCount').textContent = mcqCount;
+       document.getElementById('msqCount').textContent = msqCount;
+       document.getElementById('totalCount').textContent = textCount + mcqCount + msqCount;
+   }
+   
+   function validateAndSubmit() {
+       let isValid = true;
+       for (let i = 1; i <= textCount; i++) {
+           const errorField = document.getElementById(`error-text-${i}`);
+           if (!errorField) continue; // Skip if no error field exists
+           errorField.textContent = '';
+           const answerField = document.querySelector(`input[name="correct_answer_${i}"]`);
+           if (answerField && !answerField.value) {
+               errorField.textContent = 'The correct answer field cannot be empty';
+               isValid = false;
+           }
+       }
+   
+       for (let i = 1; i <= mcqCount; i++) {
+           const errorField = document.getElementById(`error-mcq-${i}`);
+           if (!errorField) continue; // Skip if no error field exists
+           errorField.textContent = '';
+           const answerField = document.querySelector(`input[name="mcq_correct_answer_${i}"]`);
+           if (answerField && !answerField.value) {
+               errorField.textContent = 'The correct answer field cannot be empty';
+               isValid = false;
+           }
+       }
+   
+       for (let i = 1; i <= msqCount; i++) {
+           const errorField = document.getElementById(`error-msq-${i}`);
+           if (!errorField) continue; // Skip if no error field exists
+           errorField.textContent = '';
+           const answerField = document.querySelector(`input[name="msq_correct_answers_${i}"]`);
+           if (answerField && !answerField.value) {
+               errorField.textContent = 'The correct answer field cannot be empty';
+               isValid = false;
+           }
+       }
+   
+       if (isValid) {
+               // Show success message
+           const successMessage = document.getElementById('success-message');
+           successMessage.style.display = 'block';
+           // Here you can add your form submission logic
+       }else{
+           successMessage.style.display = 'none';
+       }
+   }
+
+
+   </script>
+
+
+<script>
+    let toggleBtn = document.getElementById('toggle-btn');
+let body = document.body;
+let darkMode = localStorage.getItem('dark-mode');
+
+const enableDarkMode = () =>{
+   toggleBtn.classList.replace('fa-sun', 'fa-moon');
+   body.classList.add('dark');
+   localStorage.setItem('dark-mode', 'enabled');
+}
+
+const disableDarkMode = () =>{
+   toggleBtn.classList.replace('fa-moon', 'fa-sun');
+   body.classList.remove('dark');
+   localStorage.setItem('dark-mode', 'disabled');
+}
+
+if(darkMode === 'enabled'){
+   enableDarkMode();
+}
+
+toggleBtn.onclick = (e) =>{
+   darkMode = localStorage.getItem('dark-mode');
+   if(darkMode === 'disabled'){
+      enableDarkMode();
+   }else{
+      disableDarkMode();
+   }
+}
+
+let profile = document.querySelector('.header .flex .profile');
+
+document.querySelector('#user-btn').onclick = () =>{
+   profile.classList.toggle('active');
+   search.classList.remove('active');
+}
+
+let search = document.querySelector('.header .flex .search-form');
+
+document.querySelector('#search-btn').onclick = () =>{
+   search.classList.toggle('active');
+   profile.classList.remove('active');
+}
+
+let sideBar = document.querySelector('.side-bar');
+
+document.querySelector('#menu-btn').onclick = () =>{
+   sideBar.classList.toggle('active');
+   body.classList.toggle('active');
+}
+
+document.querySelector('#close-btn').onclick = () =>{
+   sideBar.classList.remove('active');
+   body.classList.remove('active');
+}
+
+window.onscroll = () =>{
+   profile.classList.remove('active');
+   search.classList.remove('active');
+
+   if(window.innerWidth < 1200){
+      sideBar.classList.remove('active');
+      body.classList.remove('active');
+   }
+}
+
+// Select all elements with the class 'name' and change their text content to 'Sagnik Chandra'
+document.querySelectorAll('.name').forEach(element => {
+   element.textContent = 'Dr. Sweta Bhattacharya';
+ });
+
+ document.querySelectorAll('.role').forEach(element => {
+   element.textContent = 'Teacher';
+ });
+
+ document.querySelectorAll('.te').forEach(element => {
+   element.textContent = 'Students';
+ });
+ 
+ 
+</script>
+</body>
+</html>
