@@ -4,12 +4,14 @@ const authController = require('../controllers/authController');
 
 // Register user
 router.post('/signup', authController.registerUser);
-//Landing page
+
 // Login user
 router.post('/login', authController.loginUser);
 
-//interview
-
+//Login teacher
+router.post('/tlogin', authController.loginT);
+// Register user
+router.post('/tsignup', authController.registerT);
 
 // Google login callback
 router.post('/google', authController.googleLogin);
