@@ -4,7 +4,7 @@ const session = require('express-session');
 // const connectDB = require('./config/db');
 const Test = require('./models/Test'); // Import your Test model here
 const User = require('./models/User'); // Import User model
-const Teacher = require('./models/Teacher'); // Import Teacher model
+const Teacher = require('../models/Teacher'); // Import Teacher model
 const Interview = require('./models/Interview'); // Import Interview model
 const { isAuthenticated } = require('./middleware/auth'); // Import your auth middleware
 require('dotenv').config();
