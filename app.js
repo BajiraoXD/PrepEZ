@@ -1,12 +1,33 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const session = require('express-session');
-const connectDB = require('./config/db');
+// const connectDB = require('./config/db');
+const Test = require('./models/Test'); // Import your Test model here
+const User = require('./models/User'); // Import User model
+const Teacher = require('./models/Teacher'); // Import Teacher model
+const Interview = require('./models/Interview'); // Import Interview model
+const { isAuthenticated } = require('./middleware/auth'); // Import your auth middleware
 require('dotenv').config();
 
 const app = express();
 
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('MongoDB connected...');
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1); // Exit process with failure
+  }
+};
+
+
 // Connect to the database
 connectDB();
+
 
 // Middleware
 app.use(express.json());
@@ -14,15 +35,15 @@ app.use(express.urlencoded({ extended: false }));
 
 // Set view engine to EJS
 app.set('view engine', 'ejs');
+app.use(express.static('public'));
+
 // Session middleware
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: { secure: false } // Consider setting secure to true in production with HTTPS
 }));
-
-app.use(express.static('public'));
 
 // Routes
 app.use('/auth', require('./routes/authRoutes'));
@@ -30,7 +51,6 @@ app.use('/auth', require('./routes/authRoutes'));
 // Frontend routes
 app.get('/', (req, res) => res.render('index'));
 app.get('/login', (req, res) => res.render('login'));
-
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username: username });
@@ -45,11 +65,9 @@ app.post('/login', async (req, res) => {
 });
 
 // Dashboard route
-const Interview = require('./models/Interview');
-
 app.get('/home', async (req, res) => {
     if (!req.session.username) {
-        return res.redirect('/login');
+        return res.redirect('/');
     }
 
     try {
@@ -66,45 +84,141 @@ app.get('/Interview', (req, res) => {
     res.render('Interview');
 });
 
-app.post('/submit-interview', async (req, res) => {
-    const { Name, Date: dateString, Time, roomid } = req.body;
-
-    console.log("Form data received:", { Name, dateString, Time, roomid }); // Log received data for debugging
-
+// API route for creating tests
+app.post('/api/tests', isAuthenticated, async (req, res) => {
     try {
-        // Convert the date string to a Date object
-        const interviewDate = new Date(dateString);
-        if (isNaN(interviewDate.getTime())) {
-            return res.status(400).send('Invalid date format'); // Check for invalid date
+        const { title, date, time, examTimeSpan, duration, questions } = req.body;
+
+        // Log the incoming request body
+        console.log('Incoming request body:', req.body);
+
+        // Ensure questions are parsed correctly
+        const parsedQuestions = typeof questions === 'string' ? JSON.parse(questions) : questions;
+
+        // Log parsed questions to see the structure
+        console.log('Parsed questions:', parsedQuestions);
+
+        // Ensure options are treated as an array
+        for (const question of parsedQuestions) {
+            // Check if options is an array
+            if (!Array.isArray(question.options)) {
+                // If it's not, make sure to convert it to an array
+                question.options = [question.options]; // Wrap single option in an array if needed
+            }
         }
 
-        // Check if teacherId is present in session
-        const teacherId = req.session.userId; // or req.session.teacherId, depending on your session setup
-        if (!teacherId) {
-            return res.status(403).send('Teacher ID not found in session.'); // Handle case where teacher is not logged in
-        }
+        // Log the questions after ensuring options are arrays
+        console.log('Questions with ensured options as array:', parsedQuestions);
 
-        // Create a new interview instance
-        const interview = new Interview({
-            teacherID: teacherId, // Set teacherID from session
-            Name,
-            Date: interviewDate,
-            Time,
-            roomid
+        const test = new Test({
+            title,
+            date,
+            time,
+            examTimeSpan,
+            duration,
+            questions: parsedQuestions,
+            teacher: req.session.userId, // Use session user ID
+            students: []
         });
 
-        await interview.save();
-        console.log('Interview saved:', interview);
-        res.redirect('/teachers-home');
+        await test.save();
+
+        res.status(201).json({ message: 'Test created successfully', test });
     } catch (error) {
-        console.error('Error saving interview:', error); // Log the entire error object
-        res.status(500).send(`Failed to save interview: ${error.message}`); // Handle the error with detailed message
+        console.error('Error saving test:', error);
+        res.status(500).json({ message: 'Error saving test', error: error.message });
     }
 });
 
+app.get('/api/tests/scheduled', async (req, res) => {
+    try {
+        // Fetch all tests from the database
+        const tests = await Test.find()
+            .populate('teacher', 'username') // Populate the teacher's username if needed
+            .select('title teacher date duration'); // Select only the fields you want to return
+
+        // Check if tests were found
+        if (!tests || tests.length === 0) {
+            return res.status(404).json({ message: 'No scheduled tests found.' });
+        }
+
+        res.json(tests);
+    } catch (error) {
+        console.error('Error fetching tests:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+//to get test
+// Assuming you have a Test model set up with questions
+app.get('/tests/:testId', async (req, res) => {
+    try {
+        const testId = req.params.testId;
+        const test = await Test.findById(testId).populate('teacher'); // Assuming you want to populate the teacher data
+
+        if (!test) {
+            return res.status(404).send('Test not found');
+        }
+
+        // Render the test structure EJS template
+        res.render('Test_structure', { test });
+    } catch (error) {
+        console.error('Error fetching test:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+app.get('/api/tests/:id', async (req, res) => {
+    try {
+        const testId = req.params.id;
+        console.log("Received request for test ID:", testId);
+
+        // Validate ObjectId
+        if (!mongoose.Types.ObjectId.isValid(testId)) {
+            console.log("Invalid ObjectId format:", testId);
+            return res.status(400).json({ message: 'Invalid test ID format' });
+        }
+
+        const test = await Test.findById(testId);
+        console.log("Fetched test:", test);
+
+        if (!test) {
+            console.log("Test not found for ID:", testId);
+            return res.status(404).json({ message: 'Test not found' });
+        }
+
+        res.json(test);
+    } catch (error) {
+        console.error("Error fetching test:", error);
+        res.status(500).json({ message: error.message });
+    }
+});
+//route for accessing test 
+app.get('/test_structure/:testId', async (req, res) => {
+    try {
+        const testId = req.params.testId;
+        
+        // Fetch the test and populate questions
+        const test = await Test.findById(testId).populate('questions');
+        
+        if (!test) {
+            return res.status(404).send('Test not found');
+        }
+        
+        // Render test_structure page with the fetched test data
+        res.render('test_structure', { test });
+    } catch (error) {
+        console.error('Error fetching test:', error);
+        res.status(500).send('Server error');
+    }
+});
+  
 
 
-// Teachers login routes
+// Route for students to view their scheduled tests
+app.get('/tests', isAuthenticated, (req, res) => {
+    res.render('Test'); // Renders Test.ejs
+});
+
+// Teacher login routes
 app.get('/tlogin', (req, res) => res.render('tlogin'));
 
 // Teacher login route
@@ -136,7 +250,6 @@ app.post('/tlogin', async (req, res) => {
     }
 });
 
-
 // Teachers home route
 app.get('/teachers-home', async (req, res) => {
     console.log('Session data:', req.session); // Log session data for debugging
@@ -161,9 +274,6 @@ app.get('/teachers-home', async (req, res) => {
     }
 });
 
-
-
-
 // Dynamic join route for interview rooms
 app.get('/join/:roomId', async (req, res) => {
     const roomId = req.params.roomId;
@@ -171,7 +281,6 @@ app.get('/join/:roomId', async (req, res) => {
     res.redirect(interviewUrl);
 });
 
-//Teacher-profile
 // Teacher-profile route
 app.get('/teacher_profile', async (req, res) => {
     // Check if the teacher is logged in
@@ -186,25 +295,28 @@ app.get('/teacher_profile', async (req, res) => {
     res.render('teacher_profile', { name: teacherName });
 });
 
-//contact
-app.get('/contact',async(req,res)=>{
+// Contact routes
+app.get('/contact', async (req, res) => {
     res.render('contact');
 });
-app.get('/contact_s',async(req,res)=>{
+app.get('/contact_s', async (req, res) => {
     res.render('contact_s');
 });
-//test teacher side
-app.get('/Test-teacher',async(req,res)=>{
+
+// Test teacher side route
+app.get('/Test-teacher', async (req, res) => {
     res.render('Test-teacher');
 });
-//courses
-app.get('/courses',async(req,res)=>{
+
+// Courses routes
+app.get('/courses', async (req, res) => {
     res.render('courses');
 });
-app.get('/courses_s',async(req,res)=>{
+app.get('/courses_s', async (req, res) => {
     res.render('courses_s');
 });
-//student profile
+
+// Student profile route
 app.get('/profile', async (req, res) => {
     // Check if the teacher is logged in
     if (!req.session.username) {
@@ -217,11 +329,17 @@ app.get('/profile', async (req, res) => {
     // Render the teacher profile page and pass the teacher's name
     res.render('profile', { name: Name });
 });
-//quiz
-app.get('/quiz',async(req,res)=>{
+
+// Quiz route
+app.get('/quiz', async (req, res) => {
     res.render('Quiz');
 });
-
+// Student side test route
+// Route to render the Test page for students
+// Route for students to view their scheduled tests
+app.get('/Test', isAuthenticated, (req, res) => {
+    res.render('Test'); // Renders tests.ejs
+});
 
 
 // Logout route
@@ -234,7 +352,7 @@ app.get('/logout', (req, res) => {
     });
 });
 
-
-
+// Server setup
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
