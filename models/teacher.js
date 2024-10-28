@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const TSchema = new mongoose.Schema({
+const teacherSchema = new mongoose.Schema({  // Use consistent naming
   username: {
     type: String,
     required: true,
@@ -23,5 +23,6 @@ const TSchema = new mongoose.Schema({
   },
 });
 
-const Teacher = mongoose.model('Teacher', TSchema);
+// Check if the model is already compiled to prevent the OverwriteModelError
+const Teacher = mongoose.models.Teacher || mongoose.model('Teacher', teacherSchema);
 module.exports = Teacher;
