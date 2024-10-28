@@ -100,13 +100,13 @@ exports.registerT = async (req, res) => {
     const { username, email, password } = req.body;
 
     try {
-        let teacher = await Teachers.findOne({ email });
+        let teacher = await Teacher.findOne({ email });
 
         if (teacher) {
             return res.status(400).json({ msg: 'User already exists' });
         }
 
-        teacher = new Teachers({
+        teacher = new Teacher({
             username,
             email,
             password,
@@ -127,7 +127,7 @@ exports.loginT = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const teacher = await Teachers.findOne({ email });
+        const teacher = await Teacher.findOne({ email });
 
         if (!teacher) {
             return res.status(400).json({ msg: 'Invalid credentials' });
