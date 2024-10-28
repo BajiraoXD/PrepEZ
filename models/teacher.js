@@ -24,5 +24,5 @@ const teacherSchema = new mongoose.Schema({  // Use consistent naming
 });
 
 // Check if the model is already compiled to prevent the OverwriteModelError
-const Teachers = mongoose.models.Teacher || mongoose.model('Teacher', teacherSchema);
+const Teacher = mongoose.models.Teacher || mongoose.model('Teacher', teacherSchema);
 module.exports = Teacher;
