@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrepEz Quiz</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f9fc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    /* Navbar for timer */
+    .navbar {
+      width: 100%;
+      background-color: #9a80e8;
+      color: #fff;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.2em;
+      position: sticky;
+      top: 0;
+    }
+
+    /* Sidebar for tracking questions */
+    .sidebar {
+      position: fixed;
+      left: 10px;
+      top: 80px;
+      width: 100px;
+      background-color: #fff;
+      padding: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    .sidebar h3 {
+      text-align: center;
+      color: #333;
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .status-boxes {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .status-box {
+      width: 100%;
+      padding: 5px;
+      text-align: center;
+      border-radius: 3px;
+      background-color: gray;
+      color: white;
+      font-size: 0.9em;
+    }
+
+    /* Main container */
+    .quiz-container {
+      width: 90%;
+      max-width: 600px;
+      margin-top: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Quiz card styling */
+    .quiz-card {
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    h2 {
+      color: #B197FC;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      margin-bottom: 20px;
+    }
+
+    button {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 25px;
+      border-color: #bea9fe;
+      background-color: white;
+      color: #2a2828;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      border: 0.1px solid #2a2929;
+      display: flex;
+      justify-content: center; /* Centers text horizontally */
+      align-items: center;
+      font-size: 1.5rem; /* Smaller font size */
+      height: 40px;
+      width: 150px; /* Set a fixed width for the button */
+      margin: 20px auto; /* Margin for spacing */
+    }
+
+    button:hover {
+      background-color: #B197FC;
+      color: #fff;
+      border: 0px;
+      transform: scale(1.1);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: static;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .quiz-container {
+        max-width: 100%;
+      }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 50px;
+      left: -250px; /* Hidden initially */
+      width: 250px;
+      height: calc(100vh - 50px);
+      background-color: #f0f0f0;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      transition: left 0.3s;
+      overflow-y: auto;
+    }
+
+    .sidebar.open {
+      left: 0; /* Show sidebar when open */
+    }
+
+    .status-boxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .status-boxes div {
+      width: 40px;
+      height: 40px;
+      background-color: gray;
+    }
+
+    /* Sidebar Toggle Button */
+    .sidebar-toggle {
+      position: fixed;
+      top: 60px;
+      left: 10px;
+      padding: 5px 10px;
+      background-color: #B197FC;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 0.9em;
+      z-index: 1001;
+    }
+
+    /* Instructions */
+    .instructions {
+      margin-top: 20px;
+      font-size: 0.9em;
+    }
+
+    .green {
+      color: green;
+    }
+
+    .red {
+      color: red;
+    }
+
+    .gray {
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div>PrepEz Test</div>
+    <div id="timer">Time Left: 00:00</div>
+  </div>
+
+  <div class="sidebar-toggle" onclick="toggleSidebar()">☰</div>
+
+  <div class="sidebar" id="sidebar">
+    <h3>Questions</h3>
+    <div class="status-boxes" id="question-status"></div>
+    <div class="instructions">
+      <p><span class="green">●</span> Question Attempted</p>
+      <p><span class="red">●</span> Question Skipped</p>
+      <p><span class="gray">●</span> Question Not Visited</p>
+    </div>
+  </div>
+
+  <ul>
+    <li><a href="#" class="test-link" data-test-id="671fde14af1a0164d0df22d4">Test 1</a></li>
+    <li><a href="#" class="test-link" data-test-id="671fe3614438857991d9417c">Test 2</a></li>
+
+  </ul>
+
+  <div class="quiz-container" id="quiz-container">
+    <!-- Questions will be dynamically injected here -->
+  </div>
+
+  <button onclick="submitQuiz()">Submit</button>
+
+  <script>
+    const quizContainer = document.getElementById("quiz-container");
+    const timerDisplay = document.getElementById("timer");
+    let questions = [];
+
+    // Event listener for test links
+    document.querySelectorAll('.test-link').forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const testId = link.getAttribute('data-test-id');
+        fetchTestData(testId); // Fetch and display questions for the selected test
+      });
+    });
+
+    // Fetch test data and display text questions only
+    async function fetchTestData(testId) {
+      try {
+        const response = await fetch(`/api/tests/${testId}`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const testData = await response.json();
+
+        // Filter to show only text questions
+        questions = testData.questions.filter(question => question.type === 'text');
+        displayQuestions(questions);
+        startTimer(10); // Start 10-minute timer on test load
+      } catch (error) {
+        console.error('Error fetching test data:', error);
+      }
+    }
+
+    // Display text-only questions
+    function displayQuestions(questions) {
+      quizContainer.innerHTML = ''; // Clear previous content
+      questions.forEach((question, index) => {
+        const questionElement = document.createElement('div');
+        questionElement.classList.add('question');
+        questionElement.innerHTML = `
+          <h2>Question ${index + 1}:</h2>
+          <p>${question.questionText}</p>
+          <textarea placeholder="Your answer here..." rows="4" cols="50"></textarea>
+        `;
+        quizContainer.appendChild(questionElement);
+        addStatusBox(index);
+      });
+    }
+
+    // Add question status box in the sidebar
+    function addStatusBox(index) {
+      const box = document.createElement("div");
+      box.classList.add("status-box");
+      box.id = `question-${index + 1}`;
+      box.innerText = `Q${index + 1}`;
+      document.getElementById("question-status").appendChild(box);
+    }
+
+    // Timer function
+    function startTimer(duration) {
+      let timeLeft = duration * 60;
+      const interval = setInterval(() => {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerDisplay.textContent = `Time Left: ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        timeLeft--;
+
+        if (timeLeft < 0) {
+          clearInterval(interval);
+          submitQuiz();
+        }
+      }, 1000);
+    } 
+
+    // Submit quiz
+    async function submitQuiz() {
+    let score = 0;
+    const results = [];
+
+    // Loop through each question to evaluate answers
+    questions.forEach((question, index) => {
+        const userAnswer = document.querySelectorAll("textarea")[index].value.trim(); // Get the user's answer and trim whitespace
+        const correctAnswer = question.correctAnswer.trim(); // Trim any whitespace from the correct answer
+
+        // Compare user answer to correct answer, case-insensitive
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+            score++; // Increment score if answer is correct
+        }
+
+        // Store each result to send to server if needed
+        results.push({
+            questionId: question._id,
+            userAnswer: userAnswer,
+            isCorrect: userAnswer.toLowerCase() === correctAnswer.toLowerCase()
+        });
+    });
+
+    // Display the user's score
+    alert(`You scored ${score} out of ${questions.length}`);
+
+    // Optional: Send results to server for storage
+    try {
+        const response = await fetch('/api/submit-quiz', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ results, score })
+        });
+
+        if (response.ok) {
+            alert('Quiz results submitted successfully!');
+        } else {
+            alert('Error submitting quiz results');
+        }
+    } catch (error) {
+        console.error('Error submitting quiz:', error);
+        alert('Could not submit quiz results. Please try again later.');
+    }
+}
+
+  </script>
+</body>
+</html>
